@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-page="design">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Design and technical decisions behind selected projects.">
+    <title>Design — Your Name</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Your Name</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link" href="projects.html">projects</a>
+          <a class="text-link" href="writing.html">writing</a>
+          <a class="text-link active" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+        <button class="shortcut js-palette-open" aria-label="Open command menu"><kbd>ctrl</kbd><span>+</span><kbd>K</kbd></button>
+      </header>
+
+      <main>
+        <div class="design-accordion">
+          <details class="design-section" name="design-sections" open>
+            <summary><span>UX</span><span class="section-count">02 articles</span></summary>
+            <div class="section-body">
+              <section class="ux-article-grid" id="ux-article-grid" aria-label="UX case study articles"></section>
+            </div>
+          </details>
+
+          <details class="design-section" name="design-sections">
+            <summary><span>Brand / graphic work</span><span class="section-count">13 pieces</span></summary>
+            <div class="section-body brand-body">
+              <div class="brand-grid" id="brand-grid" aria-label="Brand and graphic design work"></div>
+            </div>
+          </details>
+        </div>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
