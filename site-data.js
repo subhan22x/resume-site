@@ -1,8 +1,8 @@
 /* Edit this file to personalize the entire website. */
 window.SITE_DATA = {
   profile: {
-    name: "Your Name",
-    title: "Your Name — designer & developer",
+    name: "Subhan H",
+    title: "Subhan H — designer & developer",
     role: "Full-stack developer intern",
     company: "Market Prism",
     education: "Data analyst",

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Personal resume, projects, and writing.">
-    <title>Your Name</title>
+    <title>Subhan H</title>
     <script>
       try {
         document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
@@ -15,7 +15,7 @@
   <body>
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand text-link js-name" href="index.html">Your Name</a>
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
         <nav aria-label="Primary navigation">
           <a class="text-link active" href="index.html">about</a>
           <a class="text-link" href="projects.html">projects</a>
@@ -28,12 +28,18 @@
 
       <main>
         <section class="intro" aria-label="Resume overview">
-          <p class="diamond-line"><span>◆</span><span id="role-line"></span></p>
-          <p class="diamond-line"><span>◆</span><span id="education-line"></span></p>
-          <h2>◆ <em>what i’ve been building:</em></h2>
-          <ul class="branch-list" id="highlights"></ul>
-          <h2>◆ <em>previously:</em></h2>
-          <ul class="branch-list experience-list" id="experience"></ul>
+          <div class="intro-section intro-summary">
+            <p class="diamond-line"><span>◆</span><span id="role-line"></span></p>
+            <p class="diamond-line"><span>◆</span><span id="education-line"></span></p>
+          </div>
+          <div class="intro-section">
+            <h2>◆ <em>what i’ve been building:</em></h2>
+            <ul class="branch-list" id="highlights"></ul>
+          </div>
+          <div class="intro-section">
+            <h2>◆ <em>previously:</em></h2>
+            <ul class="branch-list experience-list" id="experience"></ul>
+          </div>
         </section>
         <a class="work-cta" href="projects.html">see what i’ve built <span aria-hidden="true">▯</span></a>
         <div class="signature" aria-label="Personal signature">
