@@ -47,14 +47,6 @@ window.SITE_DATA = {
       color: "amber",
       source: "https://github.com/",
       url: "https://example.com/"
-    },
-    {
-      title: "Home Lab",
-      description: "A Docker-based home lab for media, network storage, and experiments with the Hermes agent.",
-      tags: ["Docker", "NAS", "Agents"],
-      color: "cyan",
-      source: "https://github.com/",
-      url: "https://example.com/"
     }
   ],
 
