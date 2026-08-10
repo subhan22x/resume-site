@@ -7,13 +7,13 @@ window.SITE_DATA = {
     company: "Market Prism",
     education: "Data analyst",
     school: "USHA Construction",
-    email: "you@example.com",
+    email: "subhanhussain22@gmail.com",
     copyrightYear: new Date().getFullYear(),
     social: {
-      x: "https://x.com/",
-      linkedin: "https://linkedin.com/",
-      github: "https://github.com/",
-      source: "https://github.com/"
+      x: "https://x.com/excel_rator",
+      linkedin: "https://www.linkedin.com/in/subhan-h-431b8510a/",
+      github: "https://github.com/subhan22x",
+      source: "https://github.com/subhan22x/resume-site"
     }
   },
 
