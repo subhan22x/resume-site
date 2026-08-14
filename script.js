@@ -58,8 +58,11 @@
   }
 
   function projectHtml(project) {
+    var art = project.thumbnail
+      ? '<img class="project-thumbnail" src="' + escapeHtml(project.thumbnail) + '" alt="' + escapeHtml(project.title) + ' preview">'
+      : '<span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + escapeHtml(project.title) + '</b><small>your work goes here</small></span>';
     return '<article class="project-card">' +
-      '<div class="project-art ' + escapeHtml(project.color) + '" aria-hidden="true"><span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + escapeHtml(project.title) + '</b><small>your work goes here</small></span></div>' +
+      '<div class="project-art ' + escapeHtml(project.color) + '" aria-hidden="true">' + art + '</div>' +
       '<div class="project-copy"><div class="project-heading"><h1>' + escapeHtml(project.title) + '</h1><span>' +
         '<a href="' + escapeHtml(project.source) + '" aria-label="' + escapeHtml(project.title) + ' source">' + icons.github + '</a>' +
         '<a href="' + escapeHtml(project.url) + '" aria-label="Open ' + escapeHtml(project.title) + '">' + icons.external + '</a>' +

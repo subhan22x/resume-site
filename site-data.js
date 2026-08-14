@@ -45,6 +45,7 @@ window.SITE_DATA = {
       description: "A sold, full-stack product with active customers that generates custom jewelry concepts and helps business owners send quotes.",
       tags: ["Next.js", "Supabase", "Gemini AI"],
       color: "amber",
+      thumbnail: "assets/grow-jewelry-thumbnail.png",
       source: "https://github.com/",
       url: "https://growjewelry.io/"
     }
