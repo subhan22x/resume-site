@@ -3,10 +3,8 @@ window.SITE_DATA = {
   profile: {
     name: "Subhan H",
     title: "Subhan H — designer & developer",
-    role: "Full-stack developer intern",
-    company: "Market Prism",
-    education: "Data analyst",
-    school: "USHA Construction",
+    about: "Subhan Hussain, 23, Computer science",
+    interests: "interested in: AI diffusion, UX Design, Systems thinking, Philosophy",
     email: "subhanhussain22@gmail.com",
     copyrightYear: new Date().getFullYear(),
     social: {

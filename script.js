@@ -48,10 +48,10 @@
   }
 
   function renderAbout() {
-    var role = document.getElementById("role-line");
-    if (!role) return;
-    role.innerHTML = escapeHtml(profile.role) + ' <strong>@ ' + escapeHtml(profile.company) + '</strong>';
-    document.getElementById("education-line").innerHTML = escapeHtml(profile.education) + ' <strong>@ ' + escapeHtml(profile.school) + '</strong>';
+    var about = document.getElementById("about-line");
+    if (!about) return;
+    about.textContent = profile.about;
+    document.getElementById("interests-line").textContent = profile.interests;
     document.getElementById("highlights").innerHTML = data.highlights.map(function (item) {
       return '<li class="highlight highlight--' + escapeHtml(item.underlineColor) + '">' + item.text + '</li>';
     }).join("");
