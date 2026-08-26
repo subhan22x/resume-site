@@ -49,14 +49,14 @@
 
   function renderSiteIntro() {
     var interestLines = Array.isArray(profile.interests) ? profile.interests : [profile.interests];
-    var interests = interestLines.map(function (line) {
-      return '<span class="interest-value-line">' + escapeHtml(line) + '</span>';
+    var interests = interestLines.map(function (line, index) {
+      return '<em class="interest-value-line' + (index ? ' interest-value-line--full' : '') + '">' + escapeHtml(line) + '</em>';
     }).join("");
     document.querySelectorAll(".js-site-intro").forEach(function (container) {
       container.innerHTML =
         '<div class="intro-summary-copy">' +
           '<p class="diamond-line"><span>◆</span><span><span class="intro-name">' + escapeHtml(profile.aboutName) + '</span>, ' + escapeHtml(profile.aboutDetails) + '</span></p>' +
-          '<p class="diamond-line intro-interests"><span>◆</span><span class="interests-content"><span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span><em class="interests-list">' + interests + '</em></span></p>' +
+          '<p class="diamond-line intro-interests"><span>◆</span><span class="interests-content"><span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span>' + interests + '</span></p>' +
         '</div>' +
         '<div class="intro-headshot"><img src="assets/subhan-headshot.webp" alt="Portrait of ' + escapeHtml(profile.aboutName) + '"></div>';
     });
