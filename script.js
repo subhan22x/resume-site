@@ -50,7 +50,7 @@
   function renderAbout() {
     var about = document.getElementById("about-line");
     if (!about) return;
-    about.textContent = profile.about;
+    about.innerHTML = '<span class="intro-name">' + escapeHtml(profile.aboutName) + '</span>, ' + escapeHtml(profile.aboutDetails);
     document.getElementById("interests-line").textContent = profile.interests;
     document.getElementById("highlights").innerHTML = data.highlights.map(function (item) {
       return '<li class="highlight highlight--' + escapeHtml(item.underlineColor) + '">' + item.text + '</li>';
