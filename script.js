@@ -91,6 +91,10 @@
   function renderDesign() {
     var container = document.getElementById("ux-article-grid");
     if (!container) return;
+    var section = container.closest(".design-section");
+    var count = section && section.querySelector(".section-count");
+    if (count) count.textContent = String(data.uxArticles.length) + (data.uxArticles.length === 1 ? " article" : " articles");
+    if (!data.uxArticles.length && section) section.open = false;
     container.innerHTML = data.uxArticles.map(function (item) {
       return '<article class="ux-article-card"><div class="ux-card-art" aria-hidden="true"><span>' + escapeHtml(item.number) + '</span><i></i><i></i><i></i></div><div class="ux-card-copy"><small>case study · coming soon</small><h1>' + escapeHtml(item.title) + '</h1><p>' + escapeHtml(item.summary) + '</p><span class="read-label">read article →</span></div></article>';
     }).join("");

@@ -56,18 +56,7 @@ window.SITE_DATA = {
     { title: "five years into the future: AI 2031", date: "draft", url: "#" }
   ],
 
-  uxArticles: [
-    {
-      number: "01",
-      title: "UX case study placeholder",
-      summary: "a short introduction to the problem, process, and outcome will go here."
-    },
-    {
-      number: "02",
-      title: "UX case study placeholder",
-      summary: "replace this card with the title and excerpt for a future design article."
-    }
-  ],
+  uxArticles: [],
 
   designImages: [
     "brand-01.avif", "brand-02.avif", "brand-03.avif", "brand-04.avif",
