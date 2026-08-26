@@ -62,13 +62,14 @@
     var title = escapeHtml(project.title);
     var url = project.url ? escapeHtml(project.url) : "";
     var source = project.source ? '<a href="' + escapeHtml(project.source) + '" aria-label="' + title + ' source">' + icons.github + '</a>' : "";
-    var titleMarkup = url ? '<a class="project-title-link" href="' + url + '">' + title + '</a>' : title;
+    var cardLink = url ? '<a class="project-card-link" href="' + url + '" aria-label="Open ' + title + '"></a>' : "";
     var art = project.thumbnail
       ? '<img class="project-thumbnail" src="' + escapeHtml(project.thumbnail) + '" alt="' + title + ' preview">'
       : '<span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + title + '</b><small>your work goes here</small></span>';
     return '<article class="project-card">' +
+      cardLink +
       '<div class="project-art ' + escapeHtml(project.color) + '" aria-hidden="true">' + art + '</div>' +
-      '<div class="project-copy"><div class="project-heading"><h1>' + titleMarkup + '</h1><span>' + source +
+      '<div class="project-copy"><div class="project-heading"><h1>' + title + '</h1><span>' + source +
         (url ? '<a href="' + url + '" aria-label="Open ' + title + '">' + icons.external + '</a>' : "") +
       '</span></div><p>' + escapeHtml(project.description) + '</p><div class="tags">' + project.tags.map(escapeHtml).join(" · ") + '</div></div></article>';
   }
