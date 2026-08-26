@@ -31,7 +31,8 @@
   }
 
   function fillSharedContent() {
-    document.title = page === "about" ? profile.title : (page.charAt(0).toUpperCase() + page.slice(1) + " — " + profile.name);
+    var pageTitle = document.documentElement.dataset.title;
+    document.title = pageTitle ? pageTitle + " — " + profile.name : (page === "about" ? profile.title : (page.charAt(0).toUpperCase() + page.slice(1) + " — " + profile.name));
     document.querySelectorAll(".js-name").forEach(function (element) { element.textContent = profile.name; });
 
     var footer = document.getElementById("site-footer");
@@ -58,14 +59,17 @@
   }
 
   function projectHtml(project) {
+    var title = escapeHtml(project.title);
+    var url = project.url ? escapeHtml(project.url) : "";
+    var source = project.source ? '<a href="' + escapeHtml(project.source) + '" aria-label="' + title + ' source">' + icons.github + '</a>' : "";
+    var titleMarkup = url ? '<a class="project-title-link" href="' + url + '">' + title + '</a>' : title;
     var art = project.thumbnail
-      ? '<img class="project-thumbnail" src="' + escapeHtml(project.thumbnail) + '" alt="' + escapeHtml(project.title) + ' preview">'
-      : '<span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + escapeHtml(project.title) + '</b><small>your work goes here</small></span>';
+      ? '<img class="project-thumbnail" src="' + escapeHtml(project.thumbnail) + '" alt="' + title + ' preview">'
+      : '<span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + title + '</b><small>your work goes here</small></span>';
     return '<article class="project-card">' +
       '<div class="project-art ' + escapeHtml(project.color) + '" aria-hidden="true">' + art + '</div>' +
-      '<div class="project-copy"><div class="project-heading"><h1>' + escapeHtml(project.title) + '</h1><span>' +
-        '<a href="' + escapeHtml(project.source) + '" aria-label="' + escapeHtml(project.title) + ' source">' + icons.github + '</a>' +
-        '<a href="' + escapeHtml(project.url) + '" aria-label="Open ' + escapeHtml(project.title) + '">' + icons.external + '</a>' +
+      '<div class="project-copy"><div class="project-heading"><h1>' + titleMarkup + '</h1><span>' + source +
+        (url ? '<a href="' + url + '" aria-label="Open ' + title + '">' + icons.external + '</a>' : "") +
       '</span></div><p>' + escapeHtml(project.description) + '</p><div class="tags">' + project.tags.map(escapeHtml).join(" · ") + '</div></div></article>';
   }
 

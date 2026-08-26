@@ -37,8 +37,7 @@ window.SITE_DATA = {
       description: "A multi-user ENGIE chatbot for cross-team communication, with access-aware retrieval, citations, and strict privacy checks.",
       tags: ["RAG", "Privacy", "AI"],
       color: "violet",
-      source: "https://github.com/",
-      url: "https://example.com/"
+      url: "rag-chatbot.html"
     },
     {
       title: "Grow Jewelry SaaS",

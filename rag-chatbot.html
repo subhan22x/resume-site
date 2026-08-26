@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-page="projects" data-title="Permission-Aware RAG Chatbot">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A high-level case study of a permission-aware RAG chatbot built for enterprise knowledge at ENGIE.">
+    <title>Permission-Aware RAG Chatbot — Subhan H</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link active" href="projects.html">projects</a>
+          <a class="text-link" href="writing.html">writing</a>
+          <a class="text-link" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+        <button class="shortcut js-palette-open" aria-label="Open command menu"><kbd>ctrl</kbd><span>+</span><kbd>K</kbd></button>
+      </header>
+
+      <main class="project-article">
+        <a class="article-back" href="projects.html">← all projects</a>
+        <p class="article-kicker">ENGIE · RAG · privacy · AI</p>
+        <h1>Building a Permission-Aware RAG Chatbot for Enterprise Knowledge</h1>
+        <p class="article-dek">An internal knowledge assistant designed to retrieve the right sources for the right employee, while making its evidence and uncertainty clear.</p>
+        <p class="article-note">Internal work for ENGIE, shared at a high level under NDA.</p>
+
+        <section>
+          <p>I worked with ENGIE Energy to build an internal RAG chatbot that uses the company knowledge base to serve employees the correct files and answers based on their permission level.</p>
+          <p>Many enterprise chatbots let users query a vector database, but do not account for:</p>
+          <ul class="article-points">
+            <li>updating files and project context, including team structure</li>
+            <li>permission hierarchies, where a senior manager may be able to question the chatbot about financials while a junior engineer cannot</li>
+          </ul>
+          <p>I worked with project managers and technical teammates to address these and other company-specific structural constraints. The chatbot allows employees across teams and leadership levels to search internal documents through a chat interface while respecting their access level, preserving privacy, and citing the source material behind each response.</p>
+        </section>
+
+        <section>
+          <h2>Designing for trust, not open access</h2>
+          <p>The product assumption was that users would arrive with a specific work question, much as they would ask a project manager or senior teammate: “What is the process for this?” or “What are the deadlines for this subtask in this specific project?” The experience needed to feel conversational while updating as quickly as the internal files did. It could not fall back on stale cached data.</p>
+          <p>The user flow was designed around that:</p>
+          <ol class="article-flow">
+            <li>A user signs in and starts a new conversation or returns to an earlier one.</li>
+            <li>They ask a question in plain language.</li>
+            <li>The system resolves which document collections that user is permitted to access.</li>
+            <li>It retrieves relevant passages only from those approved documents.</li>
+            <li>The response makes its source clear through citations.</li>
+            <li>Selecting a citation opens the source document and, when available, the cited page.</li>
+          </ol>
+          <p>The core UX decision was to make uncertainty visible instead of hiding it. A response backed by company documents is labeled as such. If the system cannot find sufficient internal evidence and provides a general response, that is shown separately as general knowledge rather than presented as a company fact. This helps mitigate familiar LLM issues such as hallucination, overconfidence, and stretching weak evidence to accommodate a request.</p>
+          <p>Conversation history was also treated as a real product feature rather than an afterthought. Users can revisit, search, and continue prior chats, while the backend uses recent context to rewrite vague follow-up questions into better retrieval queries. The goal is to preserve the natural flow of a conversation without losing the precision required for search.</p>
+          <p>Administrators have a different workflow. They can manage users and access classes, upload or synchronize documents, decide which files or folders are visible to each class, and track whether a document set has been indexed. Assigning a folder can also grant access to its contents, reducing repetitive permission management while keeping the model’s search space deliberately scoped.</p>
+        </section>
+
+        <section>
+          <h2>The architecture</h2>
+          <table class="architecture-table">
+            <thead><tr><th>Step</th><th>Component / process</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Approved files and SharePoint sources</td></tr>
+              <tr><td>2</td><td>Extraction, OCR, chunking, and embeddings</td></tr>
+              <tr><td>3</td><td>Postgres + pgvector, scoped by access class</td></tr>
+              <tr><td>4</td><td>Python / FastAPI RAG service</td></tr>
+              <tr><td>5</td><td>TypeScript / Express application API</td></tr>
+              <tr><td>6</td><td>Next.js chat, citations, document preview, and admin UI</td></tr>
+            </tbody>
+          </table>
+          <p>The frontend is built with Next.js, React, and TypeScript. It provides the chat interface, conversation history, citation chips, document preview panel, and administrative screens for managing users, document visibility, and uploads.</p>
+          <p>The application backend is an Express and TypeScript service backed by Microsoft SQL Server. It handles authentication, user roles, conversation persistence, file metadata, administrative controls, and the mapping between users, access classes, and allowed documents.</p>
+          <p>We kept semantic search separate from that transactional application layer. The RAG service is built in Python with FastAPI, LangChain, PostgreSQL, and pgvector. It processes PDF, Word, PowerPoint, and Excel files; PDFs can use OCR when needed. Documents are split into token-aware chunks, embedded, and stored with metadata such as file name, page or sheet location, version information, and access-class relationships.</p>
+          <p>The most important implementation detail is that access control happens before answer generation. A user’s memberships are resolved by the application backend, then sent to the RAG service as the allowed scope. The vector query only retrieves chunks connected to those permitted document groups. In other words, the language model never receives passages from documents outside the user’s allowed scope.</p>
+          <p>We also built the retrieval path around quality thresholds and explicit source modes. When retrieved documents are strong matches, the assistant answers from those documents and attaches citations. When no relevant internal information is found, the system can say so instead of inventing an unsupported conclusion. For weaker matches, general knowledge is visually separated from document-grounded answers. This was reinforced through prompt testing focused on professional tone, correct citation behavior, and admitting when the available information was not enough to support a conclusion.</p>
+          <p>The ingestion process was designed with operational reliability in mind. Files are versioned using hashes, allowing the system to avoid unnecessary reprocessing and retain a relationship between a document and its indexed version. During re-indexing, the system tracks active ingestion work and maintains snapshots so it can recover from failures instead of leaving an access class with a partially rebuilt knowledge base.</p>
+        </section>
+
+        <section>
+          <h2>What I learned</h2>
+          <p>This project changed how I think about enterprise AI. The difficult part is rarely calling an LLM. The difficult part is designing the surrounding system: permissions, document lifecycle, source traceability, conversation context, failure states, and a user interface that communicates confidence honestly.</p>
+          <p>As a software person, this was valuable because it pushed me beyond a simple “chat with PDFs” demo. I worked on a system where product design, frontend UX, backend authorization, retrieval quality, and privacy constraints all affected whether the AI was actually useful. That is the kind of AI product work I want to keep doing: practical systems that make information easier to use without making it less trustworthy.</p>
+        </section>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
