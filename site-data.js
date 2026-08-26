@@ -25,10 +25,10 @@ window.SITE_DATA = {
   ],
 
   experience: [
-    { role: "Full-stack dev intern", company: "Market Prism", mark: "MP" },
-    { role: "Data analyst", company: "USHA Construction", mark: "UC" },
-    { role: "Product builder", company: "Grow Jewelry", mark: "GJ" },
-    { role: "AI systems", company: "ENGIE", mark: "EN" }
+    { role: "Full-stack dev intern", company: "Market Prism", mark: "MP", markColor: "market-prism" },
+    { role: "Data analyst", company: "USHA Construction", mark: "UC", markColor: "usha" },
+    { role: "Product builder", company: "Grow Jewelry", mark: "GJ", markColor: "grow-jewelry" },
+    { role: "AI systems", company: "ENGIE", mark: "EN", markColor: "engie" }
   ],
 
   projects: [
