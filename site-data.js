@@ -18,11 +18,11 @@ window.SITE_DATA = {
   },
 
   highlights: [
-    { text: "turn <strong>messy data into structured information</strong> flows and reports for USHA Construction", underlineColor: "usha" },
     { text: "built and sold <strong>Grow Jewelry</strong>, an AI jewelry generation and lead intake platform", underlineColor: "grow-jewelry" },
     { text: "developed a <strong>user-tiered RAG chatbot</strong> with strict privacy checks for ENGIE", underlineColor: "engie" },
-    { text: "shipped asynchronous <strong>image, video, and 3D generation</strong> workflows", underlineColor: "grow-jewelry" },
-    { text: "built creative AI content pipelines for <strong>two companies</strong>", underlineColor: "market-prism" }
+    { text: "turn <strong>messy data into structured information</strong> flows and reports for USHA Construction", underlineColor: "usha" },
+    { text: "built creative AI content pipelines for <strong>two companies</strong>", underlineColor: "market-prism" },
+    { text: "shipped asynchronous <strong>image, video, and 3D generation</strong> workflows", underlineColor: "grow-jewelry" }
   ],
 
   experience: [
