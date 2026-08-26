@@ -103,6 +103,10 @@
   function renderBrandWork() {
     var container = document.getElementById("brand-grid");
     if (!container) return;
+    var section = container.closest(".design-section");
+    var count = section && section.querySelector(".section-count");
+    if (count) count.textContent = String(data.designImages.length) + (data.designImages.length === 1 ? " piece" : " pieces");
+    if (section) section.open = data.designImages.length > 0;
     container.innerHTML = data.designImages.map(function (filename, index) {
       var src = "assets/design/" + encodeURIComponent(filename);
       var label = "Brand and graphic design piece " + String(index + 1).padStart(2, "0");
