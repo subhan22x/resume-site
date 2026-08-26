@@ -54,7 +54,8 @@
     document.getElementById("education-line").innerHTML = escapeHtml(profile.education) + ' <strong>@ ' + escapeHtml(profile.school) + '</strong>';
     document.getElementById("highlights").innerHTML = data.highlights.map(function (item) { return "<li>" + item + "</li>"; }).join("");
     document.getElementById("experience").innerHTML = data.experience.map(function (item) {
-      return '<li>' + escapeHtml(item.role) + ' <span class="company-mark company-mark--' + escapeHtml(item.markColor) + '">' + escapeHtml(item.mark) + '</span> <strong>' + escapeHtml(item.company) + '</strong></li>';
+      var company = item.url ? '<a class="company-link" href="' + escapeHtml(item.url) + '">' + escapeHtml(item.company) + '</a>' : escapeHtml(item.company);
+      return '<li>' + escapeHtml(item.role) + ' <span class="company-mark company-mark--' + escapeHtml(item.markColor) + '">' + escapeHtml(item.mark) + '</span> <strong>' + company + '</strong></li>';
     }).join("");
   }
 
