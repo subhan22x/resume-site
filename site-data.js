@@ -6,7 +6,7 @@ window.SITE_DATA = {
     aboutName: "Subhan Hussain",
     aboutDetails: "23, Computer science",
     interestsLabel: "interested in:",
-    interests: "AI diffusion, UX Design, Systems thinking, Philosophy",
+    interests: ["AI diffusion, UX Design,", "Systems thinking, Philosophy"],
     email: "subhanhussain22@gmail.com",
     copyrightYear: new Date().getFullYear(),
     social: {

@@ -51,7 +51,8 @@
     var about = document.getElementById("about-line");
     if (!about) return;
     about.innerHTML = '<span class="intro-name">' + escapeHtml(profile.aboutName) + '</span>, ' + escapeHtml(profile.aboutDetails);
-    document.getElementById("interests-line").innerHTML = '<span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span> <em class="interests-list">' + escapeHtml(profile.interests) + '</em>';
+    var interestLines = Array.isArray(profile.interests) ? profile.interests : [profile.interests];
+    document.getElementById("interests-line").innerHTML = '<span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span> <em class="interests-list">' + interestLines.map(escapeHtml).join("<br>") + '</em>';
     document.getElementById("highlights").innerHTML = data.highlights.map(function (item) {
       return '<li class="highlight highlight--' + escapeHtml(item.underlineColor) + '">' + item.text + '</li>';
     }).join("");
