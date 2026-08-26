@@ -52,7 +52,9 @@
     if (!role) return;
     role.innerHTML = escapeHtml(profile.role) + ' <strong>@ ' + escapeHtml(profile.company) + '</strong>';
     document.getElementById("education-line").innerHTML = escapeHtml(profile.education) + ' <strong>@ ' + escapeHtml(profile.school) + '</strong>';
-    document.getElementById("highlights").innerHTML = data.highlights.map(function (item) { return "<li>" + item + "</li>"; }).join("");
+    document.getElementById("highlights").innerHTML = data.highlights.map(function (item) {
+      return '<li class="highlight highlight--' + escapeHtml(item.underlineColor) + '">' + item.text + '</li>';
+    }).join("");
     document.getElementById("experience").innerHTML = data.experience.map(function (item) {
       var company = item.url ? '<a class="company-link" href="' + escapeHtml(item.url) + '">' + escapeHtml(item.company) + '</a>' : escapeHtml(item.company);
       return '<li>' + escapeHtml(item.role) + ' <span class="company-mark company-mark--' + escapeHtml(item.markColor) + '">' + escapeHtml(item.mark) + '</span> <strong>' + company + '</strong></li>';
