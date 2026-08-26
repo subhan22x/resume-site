@@ -10,7 +10,7 @@
         document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       } catch (_) { document.documentElement.dataset.theme = "light"; }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=site-intro-1">
   </head>
   <body>
     <div class="page-shell">
@@ -23,8 +23,9 @@
           <a class="text-link" href="design.html">design</a>
         </nav>
         <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
-        <button class="shortcut js-palette-open" aria-label="Open command menu"><kbd>ctrl</kbd><span>+</span><kbd>K</kbd></button>
       </header>
+
+      <section class="site-intro js-site-intro" aria-label="Profile introduction"></section>
 
       <main>
         <label class="project-search">
@@ -37,7 +38,7 @@
       <footer id="site-footer"></footer>
     </div>
     <div id="command-palette"></div>
-    <script src="site-data.js"></script>
-    <script src="script.js"></script>
+    <script src="site-data.js?v=site-intro-1"></script>
+    <script src="script.js?v=site-intro-1"></script>
   </body>
 </html>

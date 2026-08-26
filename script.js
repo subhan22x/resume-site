@@ -47,16 +47,29 @@
       '<p>' + profile.copyrightYear + ' © ' + escapeHtml(profile.name) + '</p>';
   }
 
-  function renderAbout() {
-    var about = document.getElementById("about-line");
-    if (!about) return;
-    about.innerHTML = '<span class="intro-name">' + escapeHtml(profile.aboutName) + '</span>, ' + escapeHtml(profile.aboutDetails);
+  function renderSiteIntro() {
     var interestLines = Array.isArray(profile.interests) ? profile.interests : [profile.interests];
-    document.getElementById("interests-line").innerHTML = '<span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span> <em class="interests-list">' + interestLines.map(escapeHtml).join("<br>") + '</em>';
-    document.getElementById("highlights").innerHTML = data.highlights.map(function (item) {
+    var interests = interestLines.map(function (line) {
+      return '<span class="interest-value-line">' + escapeHtml(line) + '</span>';
+    }).join("");
+    document.querySelectorAll(".js-site-intro").forEach(function (container) {
+      container.innerHTML =
+        '<div class="intro-summary-copy">' +
+          '<p class="diamond-line"><span>◆</span><span><span class="intro-name">' + escapeHtml(profile.aboutName) + '</span>, ' + escapeHtml(profile.aboutDetails) + '</span></p>' +
+          '<p class="diamond-line intro-interests"><span>◆</span><span class="interests-content"><span class="interests-label">' + escapeHtml(profile.interestsLabel) + '</span><em class="interests-list">' + interests + '</em></span></p>' +
+        '</div>' +
+        '<div class="intro-headshot"><img src="assets/subhan-headshot.webp" alt="Portrait of ' + escapeHtml(profile.aboutName) + '"></div>';
+    });
+  }
+
+  function renderAbout() {
+    var highlights = document.getElementById("highlights");
+    var experience = document.getElementById("experience");
+    if (!highlights || !experience) return;
+    highlights.innerHTML = data.highlights.map(function (item) {
       return '<li class="highlight highlight--' + escapeHtml(item.underlineColor) + '">' + item.text + '</li>';
     }).join("");
-    document.getElementById("experience").innerHTML = data.experience.map(function (item) {
+    experience.innerHTML = data.experience.map(function (item) {
       var company = item.url ? '<a class="company-link" href="' + escapeHtml(item.url) + '">' + escapeHtml(item.company) + '</a>' : escapeHtml(item.company);
       return '<li>' + escapeHtml(item.role) + ' <span class="company-mark company-mark--' + escapeHtml(item.markColor) + '">' + escapeHtml(item.mark) + '</span> <strong>' + company + '</strong></li>';
     }).join("");
@@ -135,6 +148,7 @@
   }
 
   fillSharedContent();
+  renderSiteIntro();
   renderAbout();
   renderProjects(data.projects);
   renderWriting();
