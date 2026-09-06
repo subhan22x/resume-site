@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-page="projects" data-title="Recall RAG">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hybrid document search, dbt analytics, text-to-SQL, and MCP tools for vehicle-recall questions.">
+    <title>Recall RAG — Subhan H</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=site-intro-4">
+    <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link active" href="projects.html">projects</a>
+          <a class="text-link" href="writing.html">writing</a>
+          <a class="text-link" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+      </header>
+
+      <section class="site-intro js-site-intro" aria-label="Profile introduction"></section>
+
+      <main class="project-article">
+        <a class="article-back" href="projects.html">← all projects</a>
+        <p class="article-kicker">RAG · dbt · Text-to-SQL · MCP</p>
+        <h1>Recall RAG: Connecting Document Search and Data Analysis</h1>
+        <p class="article-dek">Recall RAG is an AI assistant combining hybrid RAG search, ELT pipelines with dbt, and semantic-layer text-to-SQL to answer questions about vehicle recalls. An MCP server exposes its document retrieval and analytics tools to external AI agents.</p>
+        <p><a href="https://recall-rag.vercel.app">Try the application</a> · <a href="https://github.com/subhan22x/recall-rag">View the code</a></p>
+        <section>
+          <p>I built Recall RAG to explore how an AI assistant can answer questions that need both written explanations and numerical analysis. It uses public NHTSA vehicle-recall records and guidance, alongside sample parts and warehouse data, to demonstrate a workflow an operations team could use.</p>
+          <p>The distinction matters because “What does this recall notice say?” and “Which model year has the most recall campaigns?” require different approaches. One needs a relevant passage from a document; the other needs an accurate database query. Recall RAG brings both into a single conversation and shows the evidence behind the answer.</p>
+        </section>
+
+        <section>
+          <h2>Designing the experience</h2>
+          <p>My starting assumption was that users would know their question but would not necessarily know which document, table, or report could answer it.</p>
+          <p>I designed a three-panel interface around that workflow. Conversations sit on the left, the assistant occupies the middle, and supporting evidence appears on the right. Example questions introduce the different capabilities without presenting prewritten answers.</p>
+          <p>When the assistant searches documents, users can select a source to inspect the cited passage and open the PDF at the relevant page. When it queries structured data, the evidence panel shows the SQL and the business terms used to interpret the question. This lets a technical reviewer inspect the implementation without requiring every user to understand it before asking a question.</p>
+          <p>A separate workflow canvas shows how source data moves through cleaning and transformation into the tables the assistant queries. The MCP page explains the available tools and how an external agent can connect.</p>
+        </section>
+
+        <section>
+          <h2>RAG: Finding the supporting passages</h2>
+          <p>The document pipeline ingests recall narratives from the NHTSA API and an official PDF guide. It tracks document versions using content hashes, allowing unchanged material to skip repeated processing while retaining the source information needed for citations.</p>
+          <p>I split text into chunks of approximately 500 words with a 75-word overlap. PDF chunks stay within their original page, preserving page references and text coordinates. The overlap helps retain context when an explanation crosses a chunk boundary.</p>
+          <p>Retrieval combines PostgreSQL full-text search with vector search through pgvector. Keyword search helps with exact identifiers and terminology; embeddings help when a user describes something differently from the source. The system searches both independently, combines their rankings using reciprocal-rank fusion, and limits how many passages one document can contribute.</p>
+          <p>The language model receives the selected passages and their citation IDs to compose an answer. The interface also exposes retrieval details, including candidate counts and the embedding model, so the search process is visible.</p>
+        </section>
+
+        <section>
+          <h2>Text-to-SQL: Answering questions about the data</h2>
+          <p>For numerical questions, I built an ELT workflow that loads raw records into PostgreSQL and uses dbt to clean, join, and organize them into analytics tables. These models cover recall intelligence, estimated parts demand, stockout risk, and possible warehouse transfers.</p>
+          <p>A YAML semantic layer defines the available metrics, dimensions, filters, and calculations. For example, a recall count needs a clear definition because a single campaign can appear against multiple vehicle configurations. Counting rows would not necessarily count distinct recalls.</p>
+          <p>The model translates a question into a constrained, structured request using those definitions. Python code then compiles that request into SQL, validates its syntax and permitted table access, and executes it in a read-only transaction with a timeout and row limit.</p>
+          <p>This keeps calculations consistent across questions. It also makes the answer inspectable: users can see which metric was selected and the query that produced the result.</p>
+        </section>
+
+        <section>
+          <h2>MCP: Making the same capabilities reusable</h2>
+          <p>I added an MCP server so tools such as Claude, Codex, or Cursor can use the application’s retrieval and analytics capabilities.</p>
+          <p>It exposes three tools: search recall documents, query recall analytics, and check data freshness. Document searches return passages with citation information. Analytics queries return results alongside the compiled SQL and semantic definitions. Status checks report the state of the underlying data.</p>
+          <p>These tools reuse the application’s existing logic. They accept bounded requests and do not expose arbitrary SQL execution or unrestricted filesystem access. The MCP interface also records recent calls, making it possible to inspect which tool ran, how long it took, and whether it succeeded.</p>
+        </section>
+
+        <section>
+          <h2>What I learned</h2>
+          <p>This project helped me understand where retrieval ends and data modeling begins. A relevant passage can explain a recall, but reliable totals and comparisons depend on defining the data correctly beforehand.</p>
+          <p>I also learned that smaller chunks are not automatically better. They can improve precision while separating a statement from the context needed to interpret it. I built retrieval checks for expected sources and ranking, alongside analytics and adversarial checks for query behavior, rather than judging quality only by how convincing an answer sounded.</p>
+          <p>Finally, designing MCP tools made me think more carefully about interfaces. A useful tool needs a clear purpose, predictable results, and limits the application actually enforces. The same principle shaped the UX: users should be able to follow an answer back to the documents and calculations that produced it.</p>
+        </section>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js?v=site-intro-1"></script>
+    <script src="script.js?v=site-intro-3"></script>
+  </body>
+</html>
+

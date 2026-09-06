@@ -34,6 +34,15 @@ window.SITE_DATA = {
 
   projects: [
     {
+      title: "Recall RAG",
+      description: "An AI assistant combining hybrid document search, dbt pipelines, text-to-SQL, and MCP tools for vehicle-recall questions.",
+      tags: ["RAG", "dbt", "Text-to-SQL", "MCP"],
+      color: "amber",
+      thumbnail: "assets/recall-rag-thumbnail.png",
+      source: "https://github.com/subhan22x/recall-rag",
+      url: "recall-rag.html"
+    },
+    {
       title: "User-Tiered RAG Chatbot",
       description: "A multi-user ENGIE chatbot for cross-team communication, with access-aware retrieval, citations, and strict privacy checks.",
       tags: ["RAG", "Privacy", "AI"],
