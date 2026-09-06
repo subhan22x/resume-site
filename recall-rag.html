@@ -32,52 +32,51 @@
         <a class="article-back" href="projects.html">← all projects</a>
         <p class="article-kicker">RAG · dbt · Text-to-SQL · MCP</p>
         <h1>Recall RAG: Connecting Document Search and Data Analysis</h1>
-        <p class="article-dek">Recall RAG is an AI assistant combining hybrid RAG search, ELT pipelines with dbt, and semantic-layer text-to-SQL to answer questions about vehicle recalls. An MCP server exposes its document retrieval and analytics tools to external AI agents.</p>
+        <p class="article-dek">Recall RAG combines hybrid document search, dbt-powered ELT, and semantic-layer text-to-SQL to answer vehicle-recall questions. An MCP server makes its retrieval and analytics tools available to external AI agents.</p>
         <div class="article-actions" aria-label="Project links">
           <a class="article-button article-button--demo" href="https://recall-rag.vercel.app">Try the application</a>
           <a class="article-button article-button--code" href="https://github.com/subhan22x/recall-rag">View the code</a>
         </div>
         <section>
-          <p>I built Recall RAG to explore how an AI assistant can answer questions that need both written explanations and numerical analysis. It uses public NHTSA vehicle-recall records and guidance, alongside sample parts and warehouse data, to demonstrate a workflow an operations team could use.</p>
-          <p>The distinction matters because “What does this recall notice say?” and “Which model year has the most recall campaigns?” require different approaches. One needs a relevant passage from a document; the other needs an accurate database query. Recall RAG brings both into a single conversation and shows the evidence behind the answer.</p>
+          <p>I built Recall RAG to explore how one assistant can handle both written explanations and numerical analysis. It combines public NHTSA recall records and guidance with sample parts and warehouse data.</p>
+          <p>“What does this recall notice say?” needs document retrieval; “Which model year has the most campaigns?” needs a precise database query. Recall RAG brings both into one conversation and shows the evidence behind each answer.</p>
         </section>
 
         <section>
           <h2>Designing the experience</h2>
-          <p>My starting assumption was that users would know their question but would not necessarily know which document, table, or report could answer it.</p>
-          <p>I designed a three-panel interface around that workflow. Conversations sit on the left, the assistant occupies the middle, and supporting evidence appears on the right. Example questions introduce the different capabilities without presenting prewritten answers.</p>
-          <p>When the assistant searches documents, users can select a source to inspect the cited passage and open the PDF at the relevant page. When it queries structured data, the evidence panel shows the SQL and the business terms used to interpret the question. This lets a technical reviewer inspect the implementation without requiring every user to understand it before asking a question.</p>
-          <p>A separate workflow canvas shows how source data moves through cleaning and transformation into the tables the assistant queries. The MCP page explains the available tools and how an external agent can connect.</p>
+          <p>I assumed users would know what they wanted to ask without knowing which document, table, or report contained the answer.</p>
+          <p>I designed a three-panel interface: conversations on the left, the assistant in the middle, and supporting evidence on the right. Example questions introduce the system’s capabilities without showing canned answers.</p>
+          <p>For document questions, users can inspect the cited passage and open the source PDF at the relevant page. For data questions, the evidence panel shows the SQL and semantic terms used. A workflow canvas visualizes the data pipeline, while the MCP page documents the tools available to external agents.</p>
         </section>
 
         <section>
           <h2>RAG: Finding the supporting passages</h2>
-          <p>The document pipeline ingests recall narratives from the NHTSA API and an official PDF guide. It tracks document versions using content hashes, allowing unchanged material to skip repeated processing while retaining the source information needed for citations.</p>
-          <p>I split text into chunks of approximately 500 words with a 75-word overlap. PDF chunks stay within their original page, preserving page references and text coordinates. The overlap helps retain context when an explanation crosses a chunk boundary.</p>
-          <p>Retrieval combines PostgreSQL full-text search with vector search through pgvector. Keyword search helps with exact identifiers and terminology; embeddings help when a user describes something differently from the source. The system searches both independently, combines their rankings using reciprocal-rank fusion, and limits how many passages one document can contribute.</p>
-          <p>The language model receives the selected passages and their citation IDs to compose an answer. The interface also exposes retrieval details, including candidate counts and the embedding model, so the search process is visible.</p>
+          <p>The pipeline ingests NHTSA recall narratives and an official PDF guide. Content hashes version documents, skip unchanged processing, and preserve the source metadata needed for citations.</p>
+          <p>I split text into roughly 500-word chunks with 75-word overlap. PDF chunks stay within their original page, preserving page references and coordinates.</p>
+          <p>Retrieval combines PostgreSQL full-text search with pgvector. Keywords handle exact identifiers; embeddings handle paraphrased questions. Reciprocal-rank fusion combines both rankings while limiting duplicate passages from one document.</p>
+          <p>The model receives selected passages and citation IDs. The interface exposes candidate counts and the embedding model so retrieval remains inspectable.</p>
         </section>
 
         <section>
           <h2>Text-to-SQL: Answering questions about the data</h2>
-          <p>For numerical questions, I built an ELT workflow that loads raw records into PostgreSQL and uses dbt to clean, join, and organize them into analytics tables. These models cover recall intelligence, estimated parts demand, stockout risk, and possible warehouse transfers.</p>
-          <p>A YAML semantic layer defines the available metrics, dimensions, filters, and calculations. For example, a recall count needs a clear definition because a single campaign can appear against multiple vehicle configurations. Counting rows would not necessarily count distinct recalls.</p>
-          <p>The model translates a question into a constrained, structured request using those definitions. Python code then compiles that request into SQL, validates its syntax and permitted table access, and executes it in a read-only transaction with a timeout and row limit.</p>
-          <p>This keeps calculations consistent across questions. It also makes the answer inspectable: users can see which metric was selected and the query that produced the result.</p>
+          <p>For numerical questions, an ELT workflow loads raw records into PostgreSQL, then uses dbt to build analytics tables for recall intelligence, parts demand, stockout risk, and warehouse transfers.</p>
+          <p>A YAML semantic layer defines approved metrics, dimensions, filters, and calculations. This prevents a metric such as recall count from being distorted by duplicate vehicle configurations.</p>
+          <p>The model maps each question to a constrained request. Python compiles it into SQL, validates syntax and table access, then runs it read-only with timeouts and row limits.</p>
+          <p>Users can inspect both the selected metric and the query behind the result.</p>
         </section>
 
         <section>
           <h2>MCP: Making the same capabilities reusable</h2>
-          <p>I added an MCP server so tools such as Claude, Codex, or Cursor can use the application’s retrieval and analytics capabilities.</p>
-          <p>It exposes three tools: search recall documents, query recall analytics, and check data freshness. Document searches return passages with citation information. Analytics queries return results alongside the compiled SQL and semantic definitions. Status checks report the state of the underlying data.</p>
-          <p>These tools reuse the application’s existing logic. They accept bounded requests and do not expose arbitrary SQL execution or unrestricted filesystem access. The MCP interface also records recent calls, making it possible to inspect which tool ran, how long it took, and whether it succeeded.</p>
+          <p>I added an MCP server so Claude, Codex, Cursor, and other agents can use the same retrieval and analytics capabilities.</p>
+          <p>It exposes three tools: search recall documents, query recall analytics, and check data freshness. Results include citations, compiled SQL, semantic definitions, or source status as appropriate.</p>
+          <p>The tools reuse the application’s logic, accept bounded requests, and do not allow arbitrary SQL or unrestricted filesystem access. Recent calls record the tool, duration, result count, and status.</p>
         </section>
 
         <section>
           <h2>What I learned</h2>
-          <p>This project helped me understand where retrieval ends and data modeling begins. A relevant passage can explain a recall, but reliable totals and comparisons depend on defining the data correctly beforehand.</p>
-          <p>I also learned that smaller chunks are not automatically better. They can improve precision while separating a statement from the context needed to interpret it. I built retrieval checks for expected sources and ranking, alongside analytics and adversarial checks for query behavior, rather than judging quality only by how convincing an answer sounded.</p>
-          <p>Finally, designing MCP tools made me think more carefully about interfaces. A useful tool needs a clear purpose, predictable results, and limits the application actually enforces. The same principle shaped the UX: users should be able to follow an answer back to the documents and calculations that produced it.</p>
+          <p>This project clarified where retrieval ends and data modeling begins: passages explain recalls, but reliable totals depend on well-defined data.</p>
+          <p>I also learned that smaller chunks are not automatically better. Precision can come at the cost of context, so I added retrieval, ranking, analytics, and adversarial checks instead of judging answers by fluency alone.</p>
+          <p>Designing MCP tools reinforced the same lesson as the UX: capabilities need clear purposes, predictable outputs, and enforceable limits. Users should be able to trace an answer back to its sources and calculations.</p>
         </section>
       </main>
 

@@ -43,7 +43,7 @@ window.SITE_DATA = {
       url: "recall-rag.html"
     },
     {
-      title: "User-Tiered RAG Chatbot",
+      title: "Privacy-Tiered Enterprise RAG for ENGIE",
       description: "A multi-user ENGIE chatbot for cross-team communication, with access-aware retrieval, citations, and strict privacy checks.",
       tags: ["RAG", "Privacy", "AI"],
       color: "violet",
