@@ -33,7 +33,10 @@
         <p class="article-kicker">RAG · dbt · Text-to-SQL · MCP</p>
         <h1>Recall RAG: Connecting Document Search and Data Analysis</h1>
         <p class="article-dek">Recall RAG is an AI assistant combining hybrid RAG search, ELT pipelines with dbt, and semantic-layer text-to-SQL to answer questions about vehicle recalls. An MCP server exposes its document retrieval and analytics tools to external AI agents.</p>
-        <p><a href="https://recall-rag.vercel.app">Try the application</a> · <a href="https://github.com/subhan22x/recall-rag">View the code</a></p>
+        <div class="article-actions" aria-label="Project links">
+          <a class="article-button article-button--demo" href="https://recall-rag.vercel.app">Try the application</a>
+          <a class="article-button article-button--code" href="https://github.com/subhan22x/recall-rag">View the code</a>
+        </div>
         <section>
           <p>I built Recall RAG to explore how an AI assistant can answer questions that need both written explanations and numerical analysis. It uses public NHTSA vehicle-recall records and guidance, alongside sample parts and warehouse data, to demonstrate a workflow an operations team could use.</p>
           <p>The distinction matters because “What does this recall notice say?” and “Which model year has the most recall campaigns?” require different approaches. One needs a relevant passage from a document; the other needs an accurate database query. Recall RAG brings both into a single conversation and shows the evidence behind the answer.</p>
@@ -85,4 +88,3 @@
     <script src="script.js?v=site-intro-3"></script>
   </body>
 </html>
-
