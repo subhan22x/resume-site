@@ -61,6 +61,7 @@ window.SITE_DATA = {
   ],
 
   articles: [
+    { title: "AI and Enterprise Productivity: a first principles exploration", date: "in progress", url: "ai-enterprise-productivity.html" },
     { title: "imagining a better AI future for the desktop", date: "draft", url: "#" },
     { title: "on agent adoption and why consumers hate AI", date: "draft", url: "#" },
     { title: "five years into the future: AI 2031", date: "draft", url: "#" }

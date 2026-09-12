@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" data-page="writing" data-title="AI and Enterprise Productivity">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A first-principles exploration of AI, organizational productivity, and the structure of the firm. Work in progress.">
+    <title>AI and Enterprise Productivity — Subhan H</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=essay-1">
+    <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
+  </head>
+  <body>
+    <div class="page-shell essay-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link" href="projects.html">projects</a>
+          <a class="text-link active" href="writing.html">writing</a>
+          <a class="text-link" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+      </header>
+
+
+
+      <main class="essay-layout">
+        <aside class="essay-sidebar">
+          <details class="essay-contents" open>
+            <summary>Contents</summary>
+            <nav aria-label="Article contents"><a class="toc-link toc-level-2" href="#the-problem">The Problem</a>
+<a class="toc-link toc-level-2" href="#what-is-ai">What is AI</a>
+<a class="toc-link toc-level-2" href="#what-is-a-company">What is a Company</a>
+<a class="toc-link toc-level-2" href="#to-be-written">To be Written</a>
+<a class="toc-link toc-level-3" href="#3-different-shapes-of-ai-implementations">3) Different Shapes of AI Implementations</a>
+<a class="toc-link toc-level-3" href="#4-starting-from-agent-zero-building-an-ai-only-company">4) Starting from agent zero, building an AI only company</a>
+<a class="toc-link toc-level-3" href="#5-returning-back-to-earth-and-human-only-companies-what-are-humans-uniquely-needed-for">5) Returning back to earth and Human only companies: What are humans uniquely needed for</a>
+<a class="toc-link toc-level-3" href="#6-mvp-of-agent-integration-into-human-companies">6) MVP of agent integration into human companies</a>
+<a class="toc-link toc-level-3" href="#7-rsi-at-the-firm-productivity-level">7) RSI at the firm productivity level</a>
+<a class="toc-link toc-level-3" href="#8-role-of-human-ai-collaboration-by-q1-2029">8) Role of Human AI Collaboration by Q1 2029</a>
+<a class="toc-link toc-level-3" href="#9-unknowns-and-questions-to-be-figured">9) Unknowns and Questions to be Figured</a></nav>
+          </details>
+        </aside>
+        <article class="essay">
+          <a class="article-back" href="writing.html">← all writing</a>
+          <div class="essay-banner"><strong>Work in progress</strong><span>I’m still working on this essay and expect to finish it in a few days.</span></div>
+          <header class="essay-header">
+            <p class="article-kicker">AI · Organizations · Productivity</p>
+            <h1>AI and Enterprise Productivity</h1>
+            <p class="essay-subtitle">A first principles exploration</p>
+            <p class="essay-byline">Subhan H · <time datetime="2026-09-12">September 12, 2026</time></p>
+          </header>
+          <div class="essay-body"><h2 id="the-problem">The Problem</h2>
+<p>There has been a lot of talk about AI and productivity. Individuals feel very productive with AI and report large gains, especially people who write code or do mostly digital work. But that productivity does not reliably translate to the organizational level.</p>
+<p>The data backs this up. One study of 10,000 developers found that teams using AI merged almost twice as many pull requests, but code review took longer, bug counts went up, and the company's overall delivery speed didn't change.<sup><a href="https://cdn.prod.website-files.com/66f2fa250759eeb1f2b1199a/68d6e93f3060b3c8a32e72bf_AI_Engineering_Impact_Report_July_2025_Faros_AI.pdf">[1]</a></sup> People who work with a lot of companies keep noticing the same thing.<sup><a href="https://x.com/ashpreetbedi/status/2083244572218708412">[2]</a></sup></p>
+<p>This essay is an exploration of why that may be. I start by deconstructing the concept of the company from first principles, </p>
+<p>then apply what we know about AI to construct a zero-human, AI-only organization and stress test it to find the holes. </p>
+<p>Then I bring humans back in and ask where they are still needed, and will be for some time to come.</p>
+<p>The point of this is practical: to explore how to move from lighter forms of AI Integration, and scale up in adoption as the models improve, so that a firm can capture something like a recursive self-improvement effect, where the systems you set up for AI adoption make the next round of adoption faster and better. </p>
+<p>Toward the end I make some predictions about where firm-level AI productivity will be by Q1 2029.</p>
+<h2 id="what-is-ai">What is AI</h2>
+<p>There are many definitions of AI. For our purposes this essay focuses on 3 main <em>features</em> that are important when thinking about organizational productivity. </p>
+<p>AI being a</p>
+<ol>
+<li>General Purpose Technology </li>
+<li>Malleable</li>
+<li>Self improving </li>
+</ol>
+<p>The first is that AI is a general purpose technology. A computer is defined as an input output device, it takes structured input and produces structured output according to explicit instructions. </p>
+<p>AI removes both qualifiers: it takes unstructured input, language, images, ambiguous situations, and produces unstructured output, with no explicit instructions beyond a description of what is wanted. </p>
+<p>This is a big leap that perhaps has not been realized yet, because almost all tasks currently not automated inside an organization is exactly this kind of work. Information arrives messy, unstructured and leaves as a todo list item or a Jira ticket, a product design, or an invoice filled, etc. </p>
+<p>A technology that can do that step is not a tool for a function; it is a layer that runs under all of them. This is what economists mean when they call something a general purpose technology, AI is a platform in the realm that steam, electricity, and computing were. </p>
+<p>Technologies in this class share a signature. They apply across nearly every sector instead of one. They keep improving after they arrive, so the version that spreads is never the final version. And they enable complementary inventions that could not have existed before them, which is where most of their value eventually comes from.</p>
+<p>They also share a trait that gets less attention, and it is the one this essay is about: their gains arrive late. Electricity was available to factories for decades before it changed factory output, because the factories had been built around steam and had to be rebuilt before the new power source paid off. The technology was ready long before the organizations were.</p>
+<h2 id="what-is-a-company">What is a Company</h2>
+<p>If AI is a layer that runs under every function, the question is what it does to the organizations built on top of it. First we need to understand why Organizations exist at all from first principles, then we can explore how AI complements them. </p>
+<p>Ronald Coase started from a puzzle. If markets allocate resources efficiently through prices, why are there firms? The economy could be a web of individuals contracting with each other for every task, with no one ever told what to do by a manager. Instead it is full of islands of central planning called companies, inside which prices do not operate and coordination happens by authority.</p>
+<p>His answer was that using the market is not free. Every transaction has costs beyond the price. You have to find the right counterparty, bargain over terms, write a contract that anticipates what could go wrong, then monitor and enforce it. Repeated for every task, every day, those costs are ruinous. So people form firms: an employee agrees, roughly, to do reasonable things they are asked to do in exchange for a salary, and a thousand micro-negotiations collapse into one employment contract. Inside the boundary, work is coordinated by direction and routine rather than by price.</p>
+<p>This gives the firm a natural size. Internal coordination has its own costs that grow with scale: information degrades as it moves up a hierarchy, incentives drift, managers make calls a market would have made better. A firm expands until organizing one more transaction internally costs as much as buying it from the market. That margin is the boundary of the firm. And the market stays in the picture as the outer loop: internal planning can be more efficient than competition in the short run, but it needs a slower, unbiased signal from outside, profit and loss, to know when it has drifted from reality.</p>
+<p>So a firm is a coordination mechanism built around constraints. We divide work because no one person has the skills or time to do everything. We create functions because expertise is scarce, management layers to coordinate divided work, and approval processes because mistakes are costly. Nearly every structural feature of a company is an accommodation to something humans cannot do: know everything, be everywhere, or hand off a task without losing part of the intent.</p>
+<p>For a company that makes decisions and documents rather than physical things, Coase's story is nearly the whole story. There are no materials to buy and no machines to run. The cost is in the seams between people: the handoff, the misunderstanding, the round of "that's not quite what I meant." Most of the day goes to coordinating the work, not doing it.</p>
+<h2 id="to-be-written">To be Written</h2>
+<h3 id="3-different-shapes-of-ai-implementations">3) Different Shapes of AI Implementations</h3>
+<ul>
+<li>AI as chat assistant   </li>
+<li>AI as chat agent   </li>
+<li>AI as a separate team-mate   </li>
+<li>AI as a manager for tickets to be fed to humans   </li>
+<li>AI as decision maker </li>
+</ul>
+<h3 id="4-starting-from-agent-zero-building-an-ai-only-company">4) Starting from agent zero, building an AI only company</h3>
+<ul>
+<li>You need multiple identity agents not just one agent  </li>
+<li>You need good information control and defined context space  </li>
+<li>Need hierarchy and management   </li>
+<li>Pushing to extremes and finding the limits in search, coordination, decision, enforcement costs  </li>
+</ul>
+<h3 id="5-returning-back-to-earth-and-human-only-companies-what-are-humans-uniquely-needed-for">5) Returning back to earth and Human only companies: What are humans uniquely needed for</h3>
+<ul>
+<li>Robotics will take decades to get to the point of current human price, availability, dexterity, adaptability   </li>
+<li>Not everything is software, and information is patchy and messy -- humans needed for verification   </li>
+<li>Humans are primary consumers of the economy, so other humans are needed to understand what humans want   </li>
+<li>Humans are superior at judgement and intuition ie broad level search even in AGI  </li>
+<li>Human stakeholders require human upper management   </li>
+</ul>
+<h3 id="6-mvp-of-agent-integration-into-human-companies">6) MVP of agent integration into human companies</h3>
+<ul>
+<li>AI as work agent in a team, clear boundaries of human work vs AI work  </li>
+<li>Structured verifiability handoffs  </li>
+<li>AI as a neutral observer/Productivity consultant   </li>
+<li>Slow injection into workflows at various levels   </li>
+<li>Building the base layer to gain from increase in AI capability </li>
+</ul>
+<h3 id="7-rsi-at-the-firm-productivity-level">7) RSI at the firm productivity level</h3>
+<h3 id="8-role-of-human-ai-collaboration-by-q1-2029">8) Role of Human AI Collaboration by Q1 2029</h3>
+<h3 id="9-unknowns-and-questions-to-be-figured">9) Unknowns and Questions to be Figured</h3>
+<ul>
+<li>I’ve described the general structure of the problem, and given some predictions, what is unknown and are further good questions to ask in this space are below</li>
+</ul></div>
+        </article>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js?v=site-intro-1"></script>
+    <script src="script.js?v=site-intro-3"></script>
+    <script src="article.js?v=1"></script>
+  </body>
+</html>
