@@ -101,7 +101,10 @@
     var container = document.getElementById("article-list");
     if (!container) return;
     container.innerHTML = data.articles.map(function (article) {
-      return '<a href="' + escapeHtml(article.url) + '" class="article-row"><span>' + escapeHtml(article.title) + '</span><time>' + escapeHtml(article.date) + '</time></a>';
+      var content = '<span>' + escapeHtml(article.title) + '</span><time>' + escapeHtml(article.date) + '</time>';
+      return article.url === "#"
+        ? '<div class="article-row article-row--draft" aria-label="' + escapeHtml(article.title) + ', draft">' + content + '</div>'
+        : '<a href="' + escapeHtml(article.url) + '" class="article-row">' + content + '</a>';
     }).join("");
   }
 
