@@ -86,3 +86,11 @@ footer { position: relative; z-index: 1; margin-top: 5px; padding-top: 15px; bor
 }
 .essay-shell > .site-header, .essay-shell > footer { max-width: 680px; }
 .essay-body sup { font-size: .72em; line-height: 0; }
+
+/* Draft outline uses the banner's amber family, with contrast in both themes. */
+.essay-shell { --unfinished-text: #806022; --unfinished-heading: #705019; }
+:root[data-theme="dark"] .essay-shell { --unfinished-text: #bba16e; --unfinished-heading: #d0b67e; }
+.essay-unfinished { color: var(--unfinished-text); }
+.essay-body .essay-unfinished h2, .essay-body .essay-unfinished h3,
+.toc-unfinished:hover, .toc-unfinished[aria-current] { color: var(--unfinished-heading); }
+.toc-unfinished { color: var(--unfinished-text); }
