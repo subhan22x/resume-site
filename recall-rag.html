@@ -7,7 +7,7 @@
     <title>Recall RAG — Subhan H</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
       } catch (_) { document.documentElement.dataset.theme = "light"; }
     </script>
     <link rel="stylesheet" href="styles.css?v=site-intro-4">
