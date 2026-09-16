@@ -10,7 +10,7 @@
         document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
       } catch (_) { document.documentElement.dataset.theme = "light"; }
     </script>
-    <link rel="stylesheet" href="styles.css?v=grow-jewelry-1">
+    <link rel="stylesheet" href="styles.css?v=grow-jewelry-2">
     <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
   </head>
   <body>
@@ -58,6 +58,20 @@
         </section>
 
         <section>
+          <h2>Tech stack and implementation</h2>
+          <p class="tech-stack-explanations" aria-label="Grow Jewelry technology stack">
+            <span class="tech-explanation"><img src="assets/tech/react.svg" alt=""><img src="assets/tech/typescript.svg" alt=""><strong>React + TypeScript</strong> — I already had experience with them, and they made cross-device functionality easier than other frameworks.</span>
+            <span class="tech-explanation"><img src="assets/tech/nextdotjs.svg" alt=""><strong>Next.js for dynamic routing</strong> — it integrated well with Vercel, my cloud provider, and made it easier to build dynamic cross-device apps.</span>
+            <span class="tech-explanation"><img src="assets/tech/tailwindcss.svg" alt=""><strong>Tailwind CSS</strong> — the UI framework I wanted was available in Tailwind.</span>
+            <span class="tech-explanation"><img src="assets/tech/prisma.svg" alt=""><strong>Prisma</strong> — I use it to define the database schema.</span>
+            <span class="tech-explanation"><img src="assets/tech/postgresql.svg" alt=""><strong>PostgreSQL</strong> — I use it as the database type for requests, results, leads, and quotes.</span>
+            <span class="tech-explanation"><img src="assets/tech/supabase.svg" alt=""><strong>Supabase</strong> — it hosts the PostgreSQL database and provides owner authentication.</span>
+            <span class="tech-explanation"><img src="assets/tech/vercel.svg" alt=""><strong>Vercel</strong> — I chose it to host the Next.js application and API routes.</span>
+            <span class="tech-explanation"><img src="assets/tech/googlegemini.svg" alt=""><strong>Google GenAI SDK</strong> — I use it for the AI image-generation workflow, sending prompts and selected references to Gemini.</span>
+          </p>
+        </section>
+
+        <section>
           <h2>From an idea to a quote-ready lead</h2>
           <p>I designed the product around the conversation that already happens at a jewelry counter:</p>
           <ol class="article-flow">
@@ -88,25 +102,14 @@
 
         <section>
           <h2>Prompts and testing</h2>
-          <p>There are pre-selected image assets for most combinations of the jewelry design. Based on what the user selects, the relevant style, typography, metal, and emblem references are attached to the request sent to the image model.</p>
-          <p>The user's choices are turned into a prompt through a structured prompt-generation pipeline. I tested and iterated on these prompts over a few months until they produced more accurate, realistic, and consistent results.</p>
-          <p>The prompt system reinforces requirements that image models often miss:</p>
+          <p>There are pre-selected image assets for most jewelry-design combinations. The user's choices determine which references are attached and are turned into a prompt through a structured pipeline. I tested and iterated on these prompts over a few months until they produced accurate, realistic results.</p>
+          <p><strong>The problem:</strong> image-model APIs changed frequently with new releases, disrupting my prompts. Google would sometimes throttle a preview model, which lowered the quality of generations.</p>
+          <p><strong>The solution:</strong> I developed a prompt template and technique that could survive model upgrades. Because this is a commercial project for paying customers, I also needed to check outputs regularly and catch issues before they shipped.</p>
           <ul class="article-points">
-            <li>spell the customer's text correctly</li>
-            <li>keep every letter and emblem connected as one manufacturable piece</li>
-            <li>use gold for the structure and diamonds for the visible decorative surfaces</li>
-            <li>preserve the selected lettering style, metal colors, emblem, and front-facing product view</li>
+            <li>batch-test a new model before upgrading</li>
+            <li>run eight tests at once with variant prompts</li>
+            <li>diagnose issues when generations produce bad results</li>
           </ul>
-          <p>Each name-design request produces two variants. One uses Gemini 3 Pro Image and the other uses Gemini 3.1 Flash Image. This gives the customer two interpretations and lets me compare quality across a higher-detail model and a faster model instead of depending on one output.</p>
-          <p>The image-model APIs changed frequently with new releases, which could disrupt prompts that had worked before. Preview models could also be throttled, lowering the quality of generations. Because this is a commercial project for paying customers, I needed a repeatable way to catch those changes before they reached users.</p>
-          <p>I developed prompt templates and techniques designed to survive model upgrades, then built an internal Generation Lab to test a new model before upgrading:</p>
-          <ul class="article-points">
-            <li>run eight representative generations at once with controlled customer inputs and prompt variants</li>
-            <li>compare Gemini 3 Pro Image and Gemini 3.1 Flash Image outputs side by side</li>
-            <li>inspect the exact prompt, reference images, model, generation time, and success or failure state for every result</li>
-            <li>diagnose whether a bad result came from the model release, prompt template, style configuration, or attached references</li>
-          </ul>
-          <p>The application persists the normal request and result records for each test, so the evaluation uses the same generation path as the customer product. This makes prompt iteration inspectable instead of relying on whichever image looked best most recently.</p>
           <figure class="project-media project-media-grid">
             <a href="assets/grow-jewelry-generation-review.png" target="_blank" rel="noopener">
               <img src="assets/grow-jewelry-generation-review.png" alt="Generation Review showing two successful pendant outputs with their models, timings, prompts, and attached reference images">
@@ -116,48 +119,6 @@
             </a>
             <figcaption>Generation Review exposes the evidence behind each result; Generation Lab runs controlled batches before a model or prompt change reaches customers. Select either image to inspect it at full size.</figcaption>
           </figure>
-        </section>
-
-        <section>
-          <h2>Tech stack and implementation</h2>
-          <ul class="tech-stack" aria-label="Grow Jewelry technology stack">
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/react.svg" alt=""></span>
-              <div><strong>React</strong><p>I already had experience with React, and its component model worked well for a multi-step, cross-device design flow.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/typescript.svg" alt=""></span>
-              <div><strong>TypeScript</strong><p>Shared types keep customer selections, API payloads, generated results, and owner workflows consistent across the application.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/nextdotjs.svg" alt=""></span>
-              <div><strong>Next.js</strong><p>Next.js supports dynamic store, design, quote, and owner routes while keeping the frontend and API in one deployable application.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/tailwindcss.svg" alt=""></span>
-              <div><strong>Tailwind CSS</strong><p>I used Tailwind because it fit the UI system I wanted and made it practical to keep the customer and owner screens responsive.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/prisma.svg" alt=""></span>
-              <div><strong>Prisma</strong><p>Prisma defines the relational data model and provides a typed query layer for accounts, requests, results, leads, quotes, and generation jobs.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/postgresql.svg" alt=""></span>
-              <div><strong>PostgreSQL</strong><p>PostgreSQL stores the transactional record of each customer request, generation attempt, selected result, and quote.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/supabase.svg" alt=""></span>
-              <div><strong>Supabase</strong><p>Supabase hosts PostgreSQL and provides authentication for store owners and account-scoped dashboard access.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/vercel.svg" alt=""></span>
-              <div><strong>Vercel</strong><p>Vercel hosts the Next.js application and keeps longer-running image generation attached to the request lifecycle while the UI polls for results.</p></div>
-            </li>
-            <li class="tech-stack-item">
-              <span class="tech-logo"><img src="assets/tech/googlegemini.svg" alt=""></span>
-              <div><strong>Google GenAI SDK</strong><p>The GenAI SDK sends the generated prompt and selected image references to the two Gemini image models.</p></div>
-            </li>
-          </ul>
         </section>
 
         <section>
