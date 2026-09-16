@@ -18,7 +18,7 @@ window.SITE_DATA = {
   },
 
   highlights: [
-    { text: "built and sold <strong>Grow Jewelry</strong>, an AI jewelry generation and lead intake platform", underlineColor: "grow-jewelry" },
+    { text: "built and scaled <strong>Grow Jewelry</strong>, an AI jewelry generation and lead intake platform", underlineColor: "grow-jewelry" },
     { text: "developed a <strong>user-tiered RAG chatbot</strong> with strict privacy checks for ENGIE", underlineColor: "engie" },
     { text: "turn <strong>messy data into structured information</strong> flows and reports for USHA Construction", underlineColor: "usha" },
     { text: "helped with <strong>UX design of a new dashboard</strong> for daily updates for users at Market Prism", underlineColor: "market-prism" },
@@ -35,7 +35,7 @@ window.SITE_DATA = {
   projects: [
     {
       title: "Grow Jewelry SaaS",
-      description: "A sold, full-stack product with active customers that generates custom jewelry concepts and helps business owners send quotes.",
+      description: "A full-stack product I built and scaled, with active customers generating custom jewelry concepts and sending quotes.",
       tags: ["Next.js", "Supabase", "Gemini AI"],
       color: "amber",
       thumbnail: "assets/grow-jewelry-thumbnail.png",
