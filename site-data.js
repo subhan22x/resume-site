@@ -34,6 +34,14 @@ window.SITE_DATA = {
 
   projects: [
     {
+      title: "Grow Jewelry SaaS",
+      description: "A sold, full-stack product with active customers that generates custom jewelry concepts and helps business owners send quotes.",
+      tags: ["Next.js", "Supabase", "Gemini AI"],
+      color: "amber",
+      thumbnail: "assets/grow-jewelry-thumbnail.png",
+      url: "grow-jewelry.html"
+    },
+    {
       title: "Recall RAG",
       description: "An AI assistant combining hybrid document search, dbt pipelines, text-to-SQL, and MCP tools for vehicle-recall questions.",
       tags: ["RAG", "dbt", "Text-to-SQL", "MCP"],
@@ -48,14 +56,6 @@ window.SITE_DATA = {
       tags: ["RAG", "Privacy", "AI"],
       color: "violet",
       url: "rag-chatbot.html"
-    },
-    {
-      title: "Grow Jewelry SaaS",
-      description: "A sold, full-stack product with active customers that generates custom jewelry concepts and helps business owners send quotes.",
-      tags: ["Next.js", "Supabase", "Gemini AI"],
-      color: "amber",
-      thumbnail: "assets/grow-jewelry-thumbnail.png",
-      url: "grow-jewelry.html"
     }
   ],
 
