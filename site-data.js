@@ -55,8 +55,7 @@ window.SITE_DATA = {
       tags: ["Next.js", "Supabase", "Gemini AI"],
       color: "amber",
       thumbnail: "assets/grow-jewelry-thumbnail.png",
-      source: "https://github.com/",
-      url: "https://growjewelry.io/"
+      url: "grow-jewelry.html"
     }
   ],
 

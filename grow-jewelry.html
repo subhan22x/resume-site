@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en" data-page="projects" data-title="Grow Jewelry">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How Grow Jewelry turns vague custom-jewelry ideas into realistic AI concepts and quote-ready leads for jewelry stores.">
+    <title>Grow Jewelry — Subhan H</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=grow-jewelry-1">
+    <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link active" href="projects.html">projects</a>
+          <a class="text-link" href="writing.html">writing</a>
+          <a class="text-link" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+      </header>
+
+      <section class="site-intro js-site-intro" aria-label="Profile introduction"></section>
+
+      <main class="project-article">
+        <a class="article-back" href="projects.html">← all projects</a>
+        <p class="article-kicker">Product · AI image generation · B2B SaaS</p>
+        <h1>Grow Jewelry</h1>
+        <p class="article-dek">A full-stack product that helps jewelry stores turn a customer's vague idea into realistic concepts and a quote-ready lead while the customer is still in the store.</p>
+        <div class="article-actions" aria-label="Project links">
+          <a class="article-button article-button--demo" href="https://growjewelry.io/">Visit Grow Jewelry</a>
+        </div>
+
+        <figure class="project-media project-media--hero">
+          <img src="assets/grow-jewelry-thumbnail.png" alt="Grow Jewelry product screens showing the custom jewelry designer and generated pendant visuals">
+        </figure>
+
+        <section>
+          <h2>The business problem</h2>
+          <p>I had worked in a jewelry store as a graphic designer and videographer, so I was familiar with the problem.</p>
+          <p>Customers would come in wanting a custom order—from a wedding ring to a name pendant or necklace—but usually had only a vague understanding of what they wanted. In my experience, showing customers how the piece could look could nearly double the conversion rate on the spot.</p>
+          <ul class="article-points">
+            <li><strong>The issue:</strong> a traditional CAD jewelry design can take days or weeks to create.</li>
+            <li>Drawings do not give customers the same feeling as a realistic rendering of the finished piece.</li>
+            <li>If the customer leaves without a clear visual, their initial excitement can turn into “I'll think about it.”</li>
+          </ul>
+          <p><strong>The solution:</strong> use AI and a constrained design decision tree to generate realistic concepts on the spot, so customers can envision what they want before they leave the store.</p>
+          <aside class="project-callout">
+            <strong>Product boundary</strong>
+            <p>Grow Jewelry is a fast visualizer and lead-to-quote workflow. It helps a customer and jeweler agree on a direction; it does not replace manufacturing-ready CAD or a jeweler's final technical review.</p>
+          </aside>
+        </section>
+
+        <section>
+          <h2>From an idea to a quote-ready lead</h2>
+          <p>I designed the product around the conversation that already happens at a jewelry counter:</p>
+          <ol class="article-flow">
+            <li>A customer opens the store's design link or scans its QR code.</li>
+            <li>They choose the piece, style, text, metal, stones, emblem, and other relevant details.</li>
+            <li>The app turns those choices into a structured prompt and selects the matching visual references.</li>
+            <li>Two image variants generate asynchronously and appear as they finish.</li>
+            <li>The app saves the customer's choices, generated concepts, and contact information as a lead.</li>
+            <li>The store owner chooses the exact concept, adds pricing and production details, and prepares a private quote link.</li>
+          </ol>
+          <p>This makes the AI generation useful inside a business workflow. The output is not only an image; it is attached to the customer's selections and carried forward into a quote the owner can review and send.</p>
+        </section>
+
+        <section>
+          <h2>Constraining the design space</h2>
+          <p>This is the user decision tree for the custom jewelry designer. It keeps the model focused on combinations that are relevant to real jewelry orders instead of asking the customer to write a prompt.</p>
+          <figure class="project-media">
+            <img src="assets/grow-jewelry-decision-tree.png" alt="Decision tree for Grow Jewelry custom pendant options, including name, initials, logo, style, emblem, metal, and diamond quality">
+            <figcaption>The product decision tree I used to map customer choices into structured generation inputs.</figcaption>
+          </figure>
+          <ul class="article-points">
+            <li>Customers make familiar product decisions rather than prompt-engineering decisions.</li>
+            <li>Each style owns its allowed options, defaults, prompt template, and reference images.</li>
+            <li>Inputs such as text, metal color, emblem, and style are validated before generation.</li>
+            <li>The same selections are persisted for the owner, so the generated concept stays connected to the eventual quote.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Prompts and testing</h2>
+          <p>There are pre-selected image assets for most combinations of the jewelry design. Based on what the user selects, the relevant style, typography, metal, and emblem references are attached to the request sent to the image model.</p>
+          <p>The user's choices are turned into a prompt through a structured prompt-generation pipeline. I tested and iterated on these prompts over a few months until they produced more accurate, realistic, and consistent results.</p>
+          <p>The prompt system reinforces requirements that image models often miss:</p>
+          <ul class="article-points">
+            <li>spell the customer's text correctly</li>
+            <li>keep every letter and emblem connected as one manufacturable piece</li>
+            <li>use gold for the structure and diamonds for the visible decorative surfaces</li>
+            <li>preserve the selected lettering style, metal colors, emblem, and front-facing product view</li>
+          </ul>
+          <p>Each name-design request produces two variants. One uses Gemini 3 Pro Image and the other uses Gemini 3.1 Flash Image. This gives the customer two interpretations and lets me compare quality across a higher-detail model and a faster model instead of depending on one output.</p>
+          <p>The image-model APIs changed frequently with new releases, which could disrupt prompts that had worked before. Preview models could also be throttled, lowering the quality of generations. Because this is a commercial project for paying customers, I needed a repeatable way to catch those changes before they reached users.</p>
+          <p>I developed prompt templates and techniques designed to survive model upgrades, then built an internal Generation Lab to test a new model before upgrading:</p>
+          <ul class="article-points">
+            <li>run eight representative generations at once with controlled customer inputs and prompt variants</li>
+            <li>compare Gemini 3 Pro Image and Gemini 3.1 Flash Image outputs side by side</li>
+            <li>inspect the exact prompt, reference images, model, generation time, and success or failure state for every result</li>
+            <li>diagnose whether a bad result came from the model release, prompt template, style configuration, or attached references</li>
+          </ul>
+          <p>The application persists the normal request and result records for each test, so the evaluation uses the same generation path as the customer product. This makes prompt iteration inspectable instead of relying on whichever image looked best most recently.</p>
+          <figure class="project-media project-media-grid">
+            <a href="assets/grow-jewelry-generation-review.png" target="_blank" rel="noopener">
+              <img src="assets/grow-jewelry-generation-review.png" alt="Generation Review showing two successful pendant outputs with their models, timings, prompts, and attached reference images">
+            </a>
+            <a href="assets/grow-jewelry-generation-lab.png" target="_blank" rel="noopener">
+              <img src="assets/grow-jewelry-generation-lab.png" alt="Generation Lab form configured to run a mixed-metals batch across two Gemini image models">
+            </a>
+            <figcaption>Generation Review exposes the evidence behind each result; Generation Lab runs controlled batches before a model or prompt change reaches customers. Select either image to inspect it at full size.</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2>Tech stack and implementation</h2>
+          <ul class="tech-stack" aria-label="Grow Jewelry technology stack">
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/react.svg" alt=""></span>
+              <div><strong>React</strong><p>I already had experience with React, and its component model worked well for a multi-step, cross-device design flow.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/typescript.svg" alt=""></span>
+              <div><strong>TypeScript</strong><p>Shared types keep customer selections, API payloads, generated results, and owner workflows consistent across the application.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/nextdotjs.svg" alt=""></span>
+              <div><strong>Next.js</strong><p>Next.js supports dynamic store, design, quote, and owner routes while keeping the frontend and API in one deployable application.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/tailwindcss.svg" alt=""></span>
+              <div><strong>Tailwind CSS</strong><p>I used Tailwind because it fit the UI system I wanted and made it practical to keep the customer and owner screens responsive.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/prisma.svg" alt=""></span>
+              <div><strong>Prisma</strong><p>Prisma defines the relational data model and provides a typed query layer for accounts, requests, results, leads, quotes, and generation jobs.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/postgresql.svg" alt=""></span>
+              <div><strong>PostgreSQL</strong><p>PostgreSQL stores the transactional record of each customer request, generation attempt, selected result, and quote.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/supabase.svg" alt=""></span>
+              <div><strong>Supabase</strong><p>Supabase hosts PostgreSQL and provides authentication for store owners and account-scoped dashboard access.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/vercel.svg" alt=""></span>
+              <div><strong>Vercel</strong><p>Vercel hosts the Next.js application and keeps longer-running image generation attached to the request lifecycle while the UI polls for results.</p></div>
+            </li>
+            <li class="tech-stack-item">
+              <span class="tech-logo"><img src="assets/tech/googlegemini.svg" alt=""></span>
+              <div><strong>Google GenAI SDK</strong><p>The GenAI SDK sends the generated prompt and selected image references to the two Gemini image models.</p></div>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>What I learned</h2>
+          <p>The most important part of this project was not simply calling an image model. It was turning an open-ended customer request into a small set of useful decisions, preserving those decisions through generation, and giving the store owner enough context to take the next commercial step.</p>
+          <p>I also learned that visual AI needs an evaluation loop. Model names and prompt wording change, but the product requirements stay concrete: correct spelling, believable materials, connected construction, accurate customer choices, and a result a jeweler can confidently discuss. Persisting prompts and attachments made those failures easier to diagnose and improve.</p>
+        </section>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js?v=grow-jewelry-1"></script>
+    <script src="script.js?v=site-intro-3"></script>
+  </body>
+</html>
