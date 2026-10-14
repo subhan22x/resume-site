@@ -52,7 +52,7 @@ window.SITE_DATA = {
     },
     {
       title: "SearchShift-Jev",
-      description: "A launcher prototype that turns natural-language searches into app suggestions and editable task cards, with 31 commands to explore.",
+      description: "an idea demo for a generative UI; uses the Jev classification model to gather intent from natural languages, then routes it to the appropriate action or app.",
       tags: ["React", "TypeScript", "JEV", "Gemini"],
       color: "cyan",
       thumbnail: "assets/searchshift-jev-demo.gif",
