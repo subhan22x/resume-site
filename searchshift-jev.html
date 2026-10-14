@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-page="projects" data-title="SearchShift-Jev">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A launcher prototype that uses JEV to turn natural-language searches into app suggestions and editable task cards.">
+    <title>SearchShift-Jev — Subhan H</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+      } catch (_) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <link rel="stylesheet" href="styles.css?v=searchshift-jev-1">
+    <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand text-link js-name" href="index.html">Subhan H</a>
+        <nav aria-label="Primary navigation">
+          <a class="text-link" href="index.html">about</a>
+          <a class="text-link active" href="projects.html">projects</a>
+          <a class="text-link" href="writing.html">writing</a>
+          <a class="text-link" href="design.html">design</a>
+        </nav>
+        <button class="icon-button js-theme" aria-label="Toggle color theme"></button>
+      </header>
+
+      <section class="site-intro js-site-intro" aria-label="Profile introduction"></section>
+
+      <main class="project-article">
+        <a class="article-back" href="projects.html">← all projects</a>
+        <p class="article-kicker">React · TypeScript · JEV · Gemini</p>
+        <h1>SearchShift-Jev: A Launcher That Understands Intent</h1>
+        <p class="article-dek">Start with what you want to do. One search box finds an app, turns a thought into an editable task card, or opens a menu of quick commands.</p>
+        <div class="article-actions" aria-label="Project links">
+          <a class="article-button article-button--demo" href="#demo">Watch the demo</a>
+          <a class="article-button article-button--code" href="https://github.com/subhan22x/SearchShift-Jev">View the code</a>
+        </div>
+        <figure class="project-media project-media--hero" id="demo">
+          <a href="assets/searchshift-jev-demo.gif" target="_blank" rel="noopener" aria-label="Open the SearchShift-Jev demo at full size">
+            <img src="assets/searchshift-jev-demo.gif" width="960" height="540" alt="SearchShift-Jev showing its command menu, Spotify app search, calculator, shopping checklist, and timer">
+          </a>
+          <figcaption>The browser prototype with synthetic queries. Select the preview to see it at full size.</figcaption>
+        </figure>
+
+        <section>
+          <h2>Starting with the task</h2>
+          <p>I built SearchShift-Jev to explore an Android launcher where people can describe a small task without first choosing an app. A quick calculation, a shopping list, or a timer should be easy to reach from the same search box used to open Spotify.</p>
+          <p>The current implementation is a React browser prototype. It lets me test the interface, classification, and editable card states before connecting native Android capabilities.</p>
+        </section>
+
+        <section>
+          <h2>Designing the experience</h2>
+          <p>The search bar sits inside a shared task surface, with app suggestions above the widgets. While a query could still be an app search, those suggestions remain available rather than disappearing as soon as a task is detected.</p>
+          <p>Typing <code>/</code> opens 31 registered cards, grouped into everyday tasks, time and tools, find and go, and quick controls. The menu makes the available actions discoverable without requiring people to guess a phrase.</p>
+          <p>Cards have their own fields and controls. A calculation shows the computed result; a checklist lets the user edit and save items; a timer has a duration and start/pause state.</p>
+        </section>
+
+        <section>
+          <h2>Classification with clear limits</h2>
+          <p>JEV receives the query and chooses from approved task categories and app candidates. The application validates that response before deciding whether to show apps, a task card, or both.</p>
+          <p>The model selects an existing React component. It does not generate markup or execute actions. Query requests are throttled as the user types, and stale responses are ignored so an older prediction cannot overwrite newer input.</p>
+          <figure class="project-media">
+            <a href="assets/searchshift-jev-architecture.svg" target="_blank" rel="noopener" aria-label="Open the SearchShift-Jev architecture drawing">
+              <img src="assets/searchshift-jev-architecture.svg" loading="lazy" alt="Architecture showing the launcher query, server-side JEV classification, validated app and card presentation, and optional Gemini field extraction">
+            </a>
+            <figcaption>Classification chooses the experience; field extraction populates an editable draft. Provider keys stay on the server.</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2>Turning text into editable fields</h2>
+          <p>Choosing the right card is only part of the task. Names, dates, amounts, and other details also need to reach the correct fields.</p>
+          <p>Local parsers handle supported values and calculations. Optional Gemini extraction through OpenRouter helps fill supported cards after a pause in typing. Returned fields must match a fixed schema and have evidence in the original query; ungrounded values are rejected.</p>
+          <p>The result remains a draft the user can review and change. Tests cover parsing, field validation, unsupported values, malformed responses, and provider failures.</p>
+        </section>
+
+        <section>
+          <h2>The stack</h2>
+          <div class="tech-stack-explanations">
+            <p class="tech-explanation"><img src="assets/tech/react.svg" alt=""><strong>React + Vite</strong> — the launcher interface and reusable card components.</p>
+            <p class="tech-explanation"><img src="assets/tech/typescript.svg" alt=""><strong>TypeScript</strong> — approved intents, validated responses, and shared field types.</p>
+            <p class="tech-explanation"><strong>JEV</strong> — intent classification and likely app selection through server-side handlers.</p>
+            <p class="tech-explanation"><img src="assets/tech/googlegemini.svg" alt=""><strong>Gemini through OpenRouter</strong> — optional extraction of query-grounded card fields.</p>
+          </div>
+        </section>
+
+        <section>
+          <h2>What the prototype demonstrates</h2>
+          <p>SearchShift-Jev demonstrates the interaction from a typed query to a useful app suggestion or task card. It includes browser interactions such as calculations, editable lists, and countdowns.</p>
+          <p>Native messaging, calendar writes, device controls, local file access, and live forecasts still need their own integrations. The prototype keeps those actions as previews rather than implying that classification alone completes the task.</p>
+        </section>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+    <div id="command-palette"></div>
+    <script src="site-data.js?v=searchshift-jev-1"></script>
+    <script src="script.js?v=site-intro-3"></script>
+  </body>
+</html>

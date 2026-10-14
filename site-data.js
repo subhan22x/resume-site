@@ -51,6 +51,15 @@ window.SITE_DATA = {
       url: "recall-rag.html"
     },
     {
+      title: "SearchShift-Jev",
+      description: "A launcher prototype that turns natural-language searches into app suggestions and editable task cards, with 31 commands to explore.",
+      tags: ["React", "TypeScript", "JEV", "Gemini"],
+      color: "cyan",
+      thumbnail: "assets/searchshift-jev-demo.gif",
+      source: "https://github.com/subhan22x/SearchShift-Jev",
+      url: "searchshift-jev.html"
+    },
+    {
       title: "Privacy-Tiered Enterprise RAG for ENGIE",
       description: "A multi-user ENGIE chatbot for cross-team communication, with access-aware retrieval, citations, and strict privacy checks.",
       tags: ["RAG", "Privacy", "AI"],
