@@ -55,7 +55,7 @@ window.SITE_DATA = {
       description: "an idea demo for a generative UI; uses the Jev classification model to gather intent from natural languages, then routes it to the appropriate action or app.",
       tags: ["React", "TypeScript", "JEV", "Gemini"],
       color: "cyan",
-      thumbnail: "assets/searchshift-jev-demo.gif",
+      thumbnail: "assets/searchshift-jev-demo.gif?v=closeup-2",
       source: "https://github.com/subhan22x/SearchShift-Jev",
       url: "searchshift-jev.html"
     },
