@@ -42,15 +42,6 @@ window.SITE_DATA = {
       url: "grow-jewelry.html"
     },
     {
-      title: "Recall RAG",
-      description: "An AI assistant combining hybrid document search, dbt pipelines, text-to-SQL, and MCP tools for vehicle-recall questions.",
-      tags: ["RAG", "dbt", "Text-to-SQL", "MCP"],
-      color: "amber",
-      thumbnail: "assets/recall-rag-thumbnail.png",
-      source: "https://github.com/subhan22x/recall-rag",
-      url: "recall-rag.html"
-    },
-    {
       title: "SearchShift-Jev",
       description: "an idea demo for a generative UI; uses the Jev classification model to gather intent from natural languages, then routes it to the appropriate action or app.",
       tags: ["React", "TypeScript", "JEV", "Gemini"],
@@ -58,6 +49,15 @@ window.SITE_DATA = {
       thumbnail: "assets/searchshift-jev-demo.gif?v=typing-3",
       source: "https://github.com/subhan22x/SearchShift-Jev",
       url: "searchshift-jev.html"
+    },
+    {
+      title: "Recall RAG",
+      description: "An AI assistant combining hybrid document search, dbt pipelines, text-to-SQL, and MCP tools for vehicle-recall questions.",
+      tags: ["RAG", "dbt", "Text-to-SQL", "MCP"],
+      color: "amber",
+      thumbnail: "assets/recall-rag-thumbnail.png",
+      source: "https://github.com/subhan22x/recall-rag",
+      url: "recall-rag.html"
     },
     {
       title: "Privacy-Tiered Enterprise RAG for ENGIE",
