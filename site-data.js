@@ -38,7 +38,7 @@ window.SITE_DATA = {
       description: "A full-stack product I built and scaled, with active customers generating custom jewelry concepts and sending quotes.",
       tags: ["Next.js", "Supabase", "Gemini AI"],
       color: "amber",
-      thumbnail: "assets/grow-jewelry-overview.gif?v=3",
+      thumbnail: "assets/grow-jewelry-overview.gif?v=4",
       thumbnailStill: "assets/grow-jewelry-thumbnail.png",
       url: "grow-jewelry.html"
     },
