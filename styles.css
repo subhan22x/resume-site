@@ -98,3 +98,14 @@ footer { position: relative; z-index: 1; margin-top: 5px; padding-top: 15px; bor
 .essay-body .essay-unfinished h2, .essay-body .essay-unfinished h3,
 .toc-unfinished:hover, .toc-unfinished[aria-current] { color: var(--unfinished-heading); }
 .toc-unfinished { color: var(--unfinished-text); }
+
+/* Customer-facing screens in the Grow Jewelry case study. */
+.jewelry-ux-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; margin: 24px 0 16px; }
+.jewelry-ux-screen { min-width: 0; margin: 0; }
+.jewelry-ux-screen a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #100804; }
+.jewelry-ux-screen a:focus-visible { outline: 2px solid var(--strong); outline-offset: 4px; }
+.jewelry-ux-screen img { display: block; width: 100%; height: auto; }
+.jewelry-ux-screen figcaption { padding-top: 12px; color: var(--text); font-size: 13px; line-height: 1.6; }
+.jewelry-ux-screen figcaption strong { display: block; margin-bottom: 4px; color: var(--strong); font-size: 15px; font-weight: 500; }
+.project-article .jewelry-ux-note { color: var(--muted); font-size: 12px; }
+@media (max-width: 640px) { .jewelry-ux-gallery { grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 360px; margin-inline: auto; } }

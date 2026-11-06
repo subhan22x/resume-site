@@ -10,7 +10,7 @@
         document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
       } catch (_) { document.documentElement.dataset.theme = "light"; }
     </script>
-    <link rel="stylesheet" href="styles.css?v=grow-jewelry-2">
+    <link rel="stylesheet" href="styles.css?v=grow-jewelry-ux-1">
     <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
   </head>
   <body>
@@ -56,6 +56,38 @@
             <strong>Product boundary</strong>
             <p>Grow Jewelry is a fast visualizer and lead-to-quote workflow. It helps a customer and jeweler agree on a direction; it does not replace manufacturing-ready CAD or a jeweler's final technical review.</p>
           </aside>
+        </section>
+
+        <section aria-labelledby="customer-experience">
+          <h2 id="customer-experience">Designing the customer experience</h2>
+          <p>I designed the <a href="https://growjewelry.io/design">customer design flow</a> around visual choices and short steps. Customers can shape a custom piece without needing jewelry design experience or knowing how to prompt an image model.</p>
+          <div class="jewelry-ux-gallery">
+            <figure class="jewelry-ux-screen">
+              <a href="assets/grow-jewelry-ux-style.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot: choose a starting point">
+                <img src="assets/grow-jewelry-ux-style.png" alt="Name pendant style selection with a text field and a visual gallery of pendant styles" width="474" height="1011" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Choose a starting point</strong>Customers enter their text and browse visual style references instead of writing an AI prompt.</figcaption>
+            </figure>
+            <figure class="jewelry-ux-screen">
+              <a href="assets/grow-jewelry-ux-customize.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot: make it their own">
+                <img src="assets/grow-jewelry-ux-customize.png" alt="Pendant customization with a crown emblem, yellow and white gold, and a size selected" width="474" height="1011" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Make it their own</strong>Emblems, gold colors, and size are grouped into a few familiar choices, with clear selected states.</figcaption>
+            </figure>
+            <figure class="jewelry-ux-screen">
+              <a href="assets/grow-jewelry-ux-generation.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot: keep the wait useful">
+                <img src="assets/grow-jewelry-ux-generation.png" alt="Custom pendant generation screen with progress feedback and name, phone, and email fields" width="1290" height="2796" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Keep the wait useful</strong>The generation screen pairs a visible progress state with contact capture for the store’s follow-up.</figcaption>
+            </figure>
+            <figure class="jewelry-ux-screen">
+              <a href="assets/grow-jewelry-ux-logo.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot: start from an existing mark">
+                <img src="assets/grow-jewelry-ux-logo.png" alt="Logo pendant flow with an image upload, shape choices, and gold color options" width="474" height="1011" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Start from an existing mark</strong>A separate logo flow starts with an upload, then offers pendant shapes and metal colors.</figcaption>
+            </figure>
+          </div>
+          <p class="jewelry-ux-note">Select any screen to view it at full size.</p>
         </section>
 
         <section>
