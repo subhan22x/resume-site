@@ -101,11 +101,11 @@ footer { position: relative; z-index: 1; margin-top: 5px; padding-top: 15px; bor
 
 /* Customer-facing screens in the Grow Jewelry case study. */
 .jewelry-ux-carousel { margin: 24px 0 12px; }
-.jewelry-ux-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; border-radius: 12px; }
-.jewelry-ux-screen { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
-.jewelry-ux-screen a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #100804; }
-.jewelry-ux-screen a:focus-visible, .jewelry-ux-gallery:focus-visible { outline: 2px solid var(--strong); outline-offset: -3px; }
-.jewelry-ux-screen img { display: block; width: 100%; height: min(68vh, 640px); object-fit: contain; }
+.jewelry-ux-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; gap: 18px; padding: 3px 0 10px; }
+.jewelry-ux-screen { flex: 0 0 calc((100% - 18px) / 2); min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+.jewelry-ux-screen a { display: block; overflow: hidden; border-radius: 0; }
+.jewelry-ux-screen a:focus-visible, .jewelry-ux-gallery:focus-visible { outline: 2px solid var(--strong); outline-offset: -2px; }
+.jewelry-ux-screen img { display: block; width: 100%; height: auto; }
 .jewelry-ux-screen figcaption { padding: 14px 2px; color: var(--text); font-size: 13px; line-height: 1.6; }
 .jewelry-ux-screen figcaption strong { display: block; margin-bottom: 4px; color: var(--strong); font-size: 15px; font-weight: 500; }
 .jewelry-ux-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 10px; }
@@ -114,3 +114,5 @@ footer { position: relative; z-index: 1; margin-top: 5px; padding-top: 15px; bor
 .jewelry-ux-controls button:focus-visible { outline: 2px solid var(--strong); outline-offset: 3px; }
 .jewelry-ux-position { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
 .project-article .jewelry-ux-note { color: var(--muted); font-size: 12px; text-align: center; }
+
+@media (max-width: 640px) { .jewelry-ux-screen { flex-basis: 82%; } }

@@ -12,16 +12,25 @@
     slide.setAttribute("aria-roledescription", "slide");
     slide.setAttribute("aria-label", `${i + 1} of ${slides.length}`);
   });
+  function stride() {
+    return slides[1].offsetLeft - slides[0].offsetLeft;
+  }
   function update() {
-    index = Math.round(track.scrollLeft / track.clientWidth);
-    previous.disabled = index === 0;
-    next.disabled = index === slides.length - 1;
-    position.textContent = `${index + 1} / ${slides.length}`;
-    slides.forEach((slide, i) => { slide.inert = i !== index; });
+    index = Math.round(track.scrollLeft / stride());
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    previous.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= maxScroll - 2;
+    const visible = slides.map((slide, i) => {
+      const left = i * stride() - track.scrollLeft;
+      return left < track.clientWidth - 2 && left + slide.clientWidth > 2;
+    });
+    const first = visible.indexOf(true) + 1;
+    const last = visible.lastIndexOf(true) + 1;
+    position.textContent = `${first === last ? first : `${first}–${last}`} / ${slides.length}`;
+    slides.forEach((slide, i) => { slide.inert = !visible[i]; });
   }
   function move(direction) {
-    const target = Math.max(0, Math.min(slides.length - 1, index + direction));
-    track.scrollTo({ left: target * track.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    track.scrollBy({ left: direction * stride(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
   previous.addEventListener("click", () => move(-1));
   next.addEventListener("click", () => move(1));
@@ -32,7 +41,7 @@
     move(event.key === "ArrowRight" ? 1 : -1);
   });
   window.addEventListener("resize", () => {
-    track.scrollTo({ left: index * track.clientWidth, behavior: "instant" });
+    track.scrollTo({ left: index * stride(), behavior: "instant" });
     update();
   });
   update();
