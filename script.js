@@ -83,6 +83,9 @@
     var art = project.thumbnail
       ? '<img class="project-thumbnail" src="' + escapeHtml(project.thumbnail) + '" alt="' + title + ' preview">'
       : '<span class="art-grid"></span><span class="art-window"><i></i><i></i><i></i><b>' + title + '</b><small>your work goes here</small></span>';
+    if (project.thumbnail && project.thumbnailStill) {
+      art = '<picture class="project-thumbnail-picture"><source media="(prefers-reduced-motion: reduce)" srcset="' + escapeHtml(project.thumbnailStill) + '">' + art + '</picture>';
+    }
     return '<article class="project-card">' +
       cardLink +
       '<div class="project-art ' + escapeHtml(project.color) + '" aria-hidden="true">' + art + '</div>' +
