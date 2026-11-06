@@ -100,12 +100,17 @@ footer { position: relative; z-index: 1; margin-top: 5px; padding-top: 15px; bor
 .toc-unfinished { color: var(--unfinished-text); }
 
 /* Customer-facing screens in the Grow Jewelry case study. */
-.jewelry-ux-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; margin: 24px 0 16px; }
-.jewelry-ux-screen { min-width: 0; margin: 0; }
+.jewelry-ux-carousel { margin: 24px 0 12px; }
+.jewelry-ux-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin; border-radius: 12px; }
+.jewelry-ux-screen { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 .jewelry-ux-screen a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #100804; }
-.jewelry-ux-screen a:focus-visible { outline: 2px solid var(--strong); outline-offset: 4px; }
-.jewelry-ux-screen img { display: block; width: 100%; height: auto; }
-.jewelry-ux-screen figcaption { padding-top: 12px; color: var(--text); font-size: 13px; line-height: 1.6; }
+.jewelry-ux-screen a:focus-visible, .jewelry-ux-gallery:focus-visible { outline: 2px solid var(--strong); outline-offset: -3px; }
+.jewelry-ux-screen img { display: block; width: 100%; height: min(68vh, 640px); object-fit: contain; }
+.jewelry-ux-screen figcaption { padding: 14px 2px; color: var(--text); font-size: 13px; line-height: 1.6; }
 .jewelry-ux-screen figcaption strong { display: block; margin-bottom: 4px; color: var(--strong); font-size: 15px; font-weight: 500; }
-.project-article .jewelry-ux-note { color: var(--muted); font-size: 12px; }
-@media (max-width: 640px) { .jewelry-ux-gallery { grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 360px; margin-inline: auto; } }
+.jewelry-ux-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 10px; }
+.jewelry-ux-controls button { width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--strong); font: inherit; font-size: 20px; cursor: pointer; }
+.jewelry-ux-controls button:disabled { opacity: .35; cursor: default; }
+.jewelry-ux-controls button:focus-visible { outline: 2px solid var(--strong); outline-offset: 3px; }
+.jewelry-ux-position { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.project-article .jewelry-ux-note { color: var(--muted); font-size: 12px; text-align: center; }

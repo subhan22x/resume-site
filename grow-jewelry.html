@@ -10,7 +10,7 @@
         document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
       } catch (_) { document.documentElement.dataset.theme = "light"; }
     </script>
-    <link rel="stylesheet" href="styles.css?v=grow-jewelry-ux-1">
+    <link rel="stylesheet" href="styles.css?v=grow-jewelry-ux-2">
     <link rel="icon" type="image/png" href="assets/signature-favicon.png?v=1">
   </head>
   <body>
@@ -61,7 +61,8 @@
         <section aria-labelledby="customer-experience">
           <h2 id="customer-experience">Designing the customer experience</h2>
           <p>I designed the <a href="https://growjewelry.io/design">customer design flow</a> around visual choices and short steps. Customers can shape a custom piece without needing jewelry design experience or knowing how to prompt an image model.</p>
-          <div class="jewelry-ux-gallery">
+          <div class="jewelry-ux-carousel" role="region" aria-roledescription="carousel" aria-label="Customer design screens">
+          <div class="jewelry-ux-gallery" id="jewelry-ux-track" tabindex="0" aria-label="Screenshots; swipe or use arrow keys to browse">
             <figure class="jewelry-ux-screen">
               <a href="assets/grow-jewelry-ux-style.png" target="_blank" rel="noopener" aria-label="Open full-size screenshot: choose a starting point">
                 <img src="assets/grow-jewelry-ux-style.png" alt="Name pendant style selection with a text field and a visual gallery of pendant styles" width="474" height="1011" loading="lazy" decoding="async">
@@ -87,7 +88,13 @@
               <figcaption><strong>Start from an existing mark</strong>A separate logo flow starts with an upload, then offers pendant shapes and metal colors.</figcaption>
             </figure>
           </div>
-          <p class="jewelry-ux-note">Select any screen to view it at full size.</p>
+          <div class="jewelry-ux-controls">
+            <button type="button" class="jewelry-ux-prev" aria-label="Previous screenshot" aria-controls="jewelry-ux-track" disabled>←</button>
+            <span class="jewelry-ux-position" aria-live="polite" aria-atomic="true">1 / 4</span>
+            <button type="button" class="jewelry-ux-next" aria-label="Next screenshot" aria-controls="jewelry-ux-track">→</button>
+          </div>
+          </div>
+          <p class="jewelry-ux-note">Swipe to explore. Select any screen to view it at full size.</p>
         </section>
 
         <section>
@@ -164,6 +171,7 @@
       <footer id="site-footer"></footer>
     </div>
     <div id="command-palette"></div>
+    <script src="grow-jewelry.js?v=1" defer></script>
     <script src="site-data.js?v=grow-jewelry-1"></script>
     <script src="script.js?v=site-intro-3"></script>
   </body>
