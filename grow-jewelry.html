@@ -32,7 +32,7 @@
         <a class="article-back" href="projects.html">← all projects</a>
         <p class="article-kicker">Product · AI image generation · B2B SaaS</p>
         <h1>Grow Jewelry</h1>
-        <p class="article-dek">A full-stack product that helps jewelry stores turn a customer's vague idea into realistic concepts and a quote-ready lead while the customer is still in the store.</p>
+        <p class="article-dek">A full-stack web app that helps jewelry stores turn a customer's vague idea into realistic prototype and a quote to send to the customer.</p>
         <div class="article-actions" aria-label="Project links">
           <a class="article-button article-button--demo" href="https://growjewelry.io/">Visit Grow Jewelry</a>
           <a class="article-button article-button--code" href="https://github.com/subhan22x/mvp-jewelry-app2">View the code</a>
@@ -45,22 +45,22 @@
         <section>
           <h2>The business problem</h2>
           <p>I had worked in a jewelry store as a graphic designer and videographer, so I was familiar with the problem.</p>
-          <p>Customers would come in wanting a custom order—from a wedding ring to a name pendant or necklace—but usually had only a vague understanding of what they wanted. In my experience, showing customers how the piece could look could nearly double the conversion rate on the spot.</p>
+          <p>Customers would come in wanting a custom order, from a wedding ring to a name pendant or necklace, but usually had only a vague understanding of what they wanted. In my experience, showing customers how the piece could look would nearly double the conversion rate on the spot.</p>
           <ul class="article-points">
             <li><strong>The issue:</strong> a traditional CAD jewelry design can take days or weeks to create.</li>
             <li>Drawings do not give customers the same feeling as a realistic rendering of the finished piece.</li>
             <li>If the customer leaves without a clear visual, their initial excitement can turn into “I'll think about it.”</li>
           </ul>
-          <p><strong>The solution:</strong> use AI and a constrained design decision tree to generate realistic concepts on the spot, so customers can envision what they want before they leave the store.</p>
+          <p><strong>The solution:</strong> use AI Image models with inputs using a constrained design decision tree to generate realistic concepts on the spot, so customers can envision what they want before they leave the store.</p>
           <aside class="project-callout">
             <strong>Product boundary</strong>
-            <p>Grow Jewelry is a fast visualizer and lead-to-quote workflow. It helps a customer and jeweler agree on a direction; it does not replace manufacturing-ready CAD or a jeweler's final technical review.</p>
+            <p>Grow Jewelry is a fast visualizer and lead-to-quote workflow; it does not replace manufacturing-ready CAD (yet :)).</p>
           </aside>
         </section>
 
         <section aria-labelledby="customer-experience">
           <h2 id="customer-experience">Designing the customer experience</h2>
-          <p>I designed the <a href="https://growjewelry.io/design">customer design flow</a> around visual choices and short steps. Customers can shape a custom piece without needing jewelry design experience or knowing how to prompt an image model.</p>
+          <p>I designed the <a href="https://growjewelry.io/design">customer design flow</a> around visual input, through customers choosing the style and then the emblem, rather than prompting an image model, because customers rarely know what they want without comparison to what's possible.</p>
           <div class="jewelry-ux-carousel" role="region" aria-roledescription="carousel" aria-label="Customer design screens">
           <div class="jewelry-ux-gallery" id="jewelry-ux-track" tabindex="0" aria-label="Screenshots; swipe or use arrow keys to browse">
             <figure class="jewelry-ux-screen">
@@ -119,10 +119,10 @@
 
         <section>
           <h2>From an idea to a quote-ready lead</h2>
-          <p>I designed the product around the conversation that already happens at a jewelry counter:</p>
+          <p></p>
           <ol class="article-flow">
             <li>A customer opens the store's design link or scans its QR code.</li>
-            <li>They choose the piece, style, text, metal, stones, emblem, and other relevant details.</li>
+            <li>They choose the style, text, metal, stones, emblem, and other relevant details.</li>
             <li>The app turns those choices into a structured prompt and selects the matching visual references.</li>
             <li>Two image variants generate asynchronously and appear as they finish.</li>
             <li>The app saves the customer's choices, generated concepts, and contact information as a lead.</li>
